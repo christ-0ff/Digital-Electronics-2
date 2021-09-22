@@ -1,6 +1,6 @@
 <div align="right">Kryštof Buroň, 221441</div>
 
-# Digital Electronics 1
+# Digital Electronics 2
 
 ## Examples of codes for markdown:
 ### Code:
