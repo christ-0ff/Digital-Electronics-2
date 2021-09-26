@@ -20,9 +20,12 @@
  * directives. This is a common mistake.
  */
 #define LED_GREEN   PB5 // AVR pin where green LED is connected
-#define SHORT_DELAY 10
-#define DOT_DELAY  100
-#define DASH_DELAY 300
+#define FIRST_DELAY  1000
+#define DOT_DELAY    100
+#define DASH_DELAY   300
+#define SPACE_DELAY  500
+#define SPACE2_DELAY 800
+#define SPACE3_DELAY 2000
                         // Delay in milliseconds
 #ifndef F_CPU           // Preprocessor directive allows for conditional
                         // compilation. The #ifndef means "if not defined".
@@ -56,12 +59,63 @@ int main(void)
     while (1)
     {
         // Pause several milliseconds
-        _delay_ms(DASH_DELAY);
+        _delay_ms(FIRST_DELAY);
        
         // Invert LED in Data Register
         // PORTB = PORTB xor 0010 0000
-        PORTB = PORTB ^ (1<<LED_GREEN);
-       
+        // PORTB = PORTB ^ (1<<LED_GREEN);	
+	
+	
+		// D = - . .
+		// = -
+        PORTB = PORTB ^ (1<<LED_GREEN); 
+		_delay_ms(DASH_DELAY);
+		PORTB = PORTB ^ (1<<LED_GREEN); 
+		_delay_ms(SPACE_DELAY);
+		// = .
+		PORTB = PORTB ^ (1<<LED_GREEN); 
+		_delay_ms(DOT_DELAY);
+		PORTB = PORTB ^ (1<<LED_GREEN); 
+		_delay_ms(SPACE_DELAY);
+	    // = .
+		PORTB = PORTB ^ (1<<LED_GREEN); 
+		_delay_ms(DOT_DELAY);
+		PORTB = PORTB ^ (1<<LED_GREEN); 
+		_delay_ms(SPACE2_DELAY);
+		
+		// E = .
+		// = .
+	   	PORTB = PORTB ^ (1<<LED_GREEN);
+	   	_delay_ms(DOT_DELAY);
+	   	PORTB = PORTB ^ (1<<LED_GREEN);
+	  	_delay_ms(SPACE2_DELAY);
+		  
+		// 2 = . . - - -
+		// = .
+	   	PORTB = PORTB ^ (1<<LED_GREEN);
+	   	_delay_ms(DOT_DELAY);
+	   	PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(SPACE_DELAY);
+		// = .
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(DOT_DELAY);
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(SPACE_DELAY);	 
+		// = -
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(DASH_DELAY);
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(SPACE_DELAY);		 
+		// = -
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(DASH_DELAY);
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(SPACE_DELAY);		 
+		// = -
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(DASH_DELAY);
+		PORTB = PORTB ^ (1<<LED_GREEN);
+		_delay_ms(SPACE3_DELAY);	   
         
     }
 

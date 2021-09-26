@@ -45,8 +45,17 @@ int main(void)
     {
         // Pause several milliseconds
         _delay_ms(SHORT_DELAY);
-
-        // WRITE YOUR CODE HERE
+        
+        // = -        
+        PORTB = PORTB ^ (1<<LED_GREEN); 
+        _delay_ms(DASH_DELAY);
+        PORTB = PORTB ^ (1<<LED_GREEN); 
+        _delay_ms(SPACE_DELAY);
+        // = .
+        PORTB = PORTB ^ (1<<LED_GREEN); 
+        _delay_ms(DOT_DELAY);
+        PORTB = PORTB ^ (1<<LED_GREEN); 
+        _delay_ms(SPACE_DELAY);
     }
 
     // Will never reach this
