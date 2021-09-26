@@ -1,4 +1,6 @@
 <div align="right">Kryštof Buroň, 221441</div>
+
+
 # Lab 1: Kryštof Buroň
 
 Link to `Digital-electronics-2` GitHub repository:
