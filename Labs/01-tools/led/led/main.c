@@ -22,7 +22,7 @@
 #define LED_GREEN   PB5 // AVR pin where green LED is connected
 #define SHORT_DELAY 10
 #define DOT_DELAY  100
-#define DASH_DELAY 3000
+#define DASH_DELAY 300
                         // Delay in milliseconds
 #ifndef F_CPU           // Preprocessor directive allows for conditional
                         // compilation. The #ifndef means "if not defined".
