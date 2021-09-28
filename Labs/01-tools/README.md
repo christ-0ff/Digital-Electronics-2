@@ -69,4 +69,4 @@ int main(void)
 
 2. Scheme of Morse code application (connection of AVR device, LED, resistor, and supply voltage). 
 
-   ![figure](images/11.png)
+   ![figure](images/1.png)
