@@ -44,6 +44,7 @@ int main(void)
 
     // Configure the second LED at port C
     DDRC = DDRC | (1<<LED_RED);
+    // ...and turn LED on in Data Register
     PORTC = PORTC | (1<<LED_RED);
      
     // Infinite loop
