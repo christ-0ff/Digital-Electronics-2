@@ -1,9 +1,40 @@
+
+## Preparation tasks (done before the lab at home)
+
+1. Draw two basic ways to connect a LED to the output pin of the microcontroller: LED active-low, LED active-high.
+
+![ohms law](images/1.png)
+
+2. [Calculate LED resistor value](https://electronicsclub.info/leds.htm) for typical red and blue LEDs.
+
+
+
+| **LED color** | **Supply voltage** | **LED current** | **LED voltage** | **Resistor value** |
+| :-: | :-: | :-: | :-: | :-: |
+| red | 5&nbsp;V | 20&nbsp;mA | 2V | 150 ohm |
+| blue | 5&nbsp;V | 20&nbsp;mA | 4V | 50 ohm |
+
+```LaTeX
+R = \frac{V_{SUPPLY}-V_{LED}}{I} =
+```
+
+3. Draw the basic ways to connect a push button to the microcontroller input pin: button active-low, button active-high.
+
+![ohms law](images/2.png)
+
+
+
+
+
+
+
+
+
 # Lab 2: YOUR_FIRSTNAME FAMILYNAME
 
 Link to your `Digital-electronics-2` GitHub repository:
 
    [https://github.com/...](https://github.com/...)
-
 
 ### Active-low and active-high LEDs
 
@@ -12,7 +43,7 @@ Link to your `Digital-electronics-2` GitHub repository:
 | **DDRB** | **Description** |
 | :-: | :-- |
 | 0 | Input pin |
-| 1 | |
+| 1 | Output pin |
 
 | **PORTB** | **Description** |
 | :-: | :-- |
@@ -22,9 +53,9 @@ Link to your `Digital-electronics-2` GitHub repository:
 | **DDRB** | **PORTB** | **Direction** | **Internal pull-up resistor** | **Description** |
 | :-: | :-: | :-: | :-: | :-- |
 | 0 | 0 | input | no | Tri-state, high-impedance |
-| 0 | 1 | | | |
-| 1 | 0 | | | |
-| 1 | 1 | | | |
+| 0 | 1 | input | on |  |
+| 1 | 0 | output | | |
+| 1 | 1 | output | | |
 
 2. Part of the C code listing with syntax highlighting, which blinks alternately with a pair of LEDs; let one LED is connected to port B and the other to port C:
 
