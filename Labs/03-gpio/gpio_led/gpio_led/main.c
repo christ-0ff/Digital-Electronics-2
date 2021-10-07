@@ -13,7 +13,7 @@
 /* Defines -----------------------------------------------------------*/
 #define LED_GREEN   PB5     // AVR pin where green LED is connected
 #define LED_RED     PC5  
-#define BUTTON      PD5
+#define BUTTON      PD0
 #define BLINK_DELAY 500
 #ifndef F_CPU
 # define F_CPU 16000000     // CPU frequency in Hz required for delay
@@ -22,6 +22,7 @@
 /* Includes ----------------------------------------------------------*/
 #include <util/delay.h>     // Functions for busy-wait delay loops
 #include <avr/io.h>         // AVR device-specific IO definitions
+#include <avr/sfr_defs.h>
 #include "gpio.h"           // GPIO library for AVR-GCC
 
 /* Function definitions ----------------------------------------------*/
@@ -40,7 +41,7 @@ int main(void)
 
     // Configure the second LED at port C
     GPIO_config_output(&DDRC, LED_RED);
-    GPIO_write_low(&PORTC, LED_RED);
+    GPIO_write_high(&PORTC, LED_RED);
 
     // Configure Push button at port D and enable internal pull-up resistor
     GPIO_config_input_pullup(&DDRD, BUTTON);
@@ -48,12 +49,16 @@ int main(void)
     // Infinite loop
     while (1)
     {
-        // Pause several milliseconds
-        _delay_ms(BLINK_DELAY);
         
-        GPIO_toggle(&PORTB, LED_GREEN);
-        GPIO_toggle(&PORTC, LED_RED);
-
+        if(bit_is_clear(PIND, BUTTON))
+        {
+			// Pause several milliseconds
+			_delay_ms(BLINK_DELAY);
+			
+			GPIO_toggle(&PORTB, LED_GREEN);
+			GPIO_toggle(&PORTC, LED_RED);
+			loop_until_bit_is_set(PIND, BUTTON);
+		}
     }
 
     // Will never reach this
