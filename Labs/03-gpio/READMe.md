@@ -2,7 +2,7 @@
 
 Link to my `Digital-electronics-2` GitHub repository:
 
-   [https://github.com/christ-0ff](https://github.com/christ-0ff)
+   [https://github.com/christ-0ff/Digital-Electronics-2](https://github.com/christ-0ff/Digital-Electronics-2)
 
 ### Data types in C
 
@@ -21,8 +21,9 @@ Link to my `Digital-electronics-2` GitHub repository:
 ### GPIO library
 
 1. In your words, describe the difference between the declaration and the definition of the function in C.
-   * Function declaration - 
-   * Function definition - 
+   * Function declaration - Function declaration gives us information about function itself. It gives us return type of the function, name of the function, and parameters which are used by the function(if there are any/function does not need to contain any parameters).
+   
+   * Function definition - Function definition gives us same information about function as function declaration, but in addition it contains body of the function. Body of the function tells us what the function does.
 
 2. Part of the C code listing with syntax highlighting, which toggles LEDs only if push button is pressed. Otherwise, the value of the LEDs does not change. Use function from your GPIO library. Let the push button is connected to port D:
 
