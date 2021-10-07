@@ -20,7 +20,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 ### GPIO library
 
-1. Description of the difference between the declaration and the definition of the function in C, in my words.
+1. Description of the difference between the declaration and the definition of the function in C:
 
    * Function declaration - Function declaration gives us information about function itself. It gives us return type of the function, name of the function, and parameters which are used by the function(if there are any/function does not need to contain any parameters).
    
