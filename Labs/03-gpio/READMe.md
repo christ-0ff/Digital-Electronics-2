@@ -6,7 +6,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 ### Data types in C
 
-1. Complete table.
+1. Completed table.
 
 | **Data type** | **Number of bits** | **Range** | **Description** |
 | :-: | :-: | :-: | :-- | 
