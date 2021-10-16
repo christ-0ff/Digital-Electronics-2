@@ -68,7 +68,7 @@ int main(void)
          TIM1_overflow_262ms();
       }
       
-        /* Empty loop. All subsequent operations are performed exclusively 
+        /* Empty loop. All subsequent operations are performed exclusivqely 
          * inside interrupt service routines ISRs */
     }
 
@@ -91,9 +91,7 @@ ISR(TIMER1_OVF_vect)
     else
     {
       i++;
-    }      
-    
-    
+    }         
     
     //if(i == 0)
     //{
