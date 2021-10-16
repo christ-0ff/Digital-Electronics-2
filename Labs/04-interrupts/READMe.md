@@ -59,7 +59,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 
 
-
+### Addition 
 
 | **Module** | **Operation** | **I/O register(s)** | **Bit(s)** |
 | :-: | :-- | :-: | :-- |

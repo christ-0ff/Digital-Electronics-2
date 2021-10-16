@@ -93,49 +93,43 @@ ISR(TIMER1_OVF_vect)
       i++;
     }         
 
-    if(i == 0)
+    if(i == 1)
     {
         GPIO_toggle(&PORTB,LED_D1);
     }
-    else if(i == 1)
-    {
-	    //GPIO_toggle(&PORTB,LED_D1);
-	    GPIO_toggle(&PORTB,LED_D4);
-    }
     else if(i == 2)
     {
-	   // GPIO_toggle(&PORTB,LED_D2);
-	    //GPIO_toggle(&PORTB,LED_D3);
+	    GPIO_toggle(&PORTB,LED_D1);
+	    GPIO_toggle(&PORTB,LED_D2);
     }
-    //else if(i == 3)
-    //{
-	    //GPIO_toggle(&PORTB,LED_D3);
-	    //GPIO_toggle(&PORTB,LED_D4);
-    //}
-////    else if(i == 4)
-  ////  {
-	////    GPIO_toggle(&PORTB,LED_D4);
-	  ////  GPIO_toggle(&PORTB,LED_D4);
-    ////}
-    ////
-    //else if(i == 5)
-    //{
-	    //GPIO_toggle(&PORTB,LED_D4);
-	    //GPIO_toggle(&PORTB,LED_D3);
-    //}
-    //else if(i == 6)
-    //{
-	    //GPIO_toggle(&PORTB,LED_D3);
-	    //GPIO_toggle(&PORTB,LED_D2);
-    //}
-    //else if(i == 7)
-    //{
-	    //GPIO_toggle(&PORTB,LED_D2);
-	    //GPIO_toggle(&PORTB,LED_D1);
-    //}
-    //else if(i == 8)
-    //{
-	    //GPIO_toggle(&PORTB,LED_D1);
-    //}    
-
+    else if(i == 3)
+    {
+	    GPIO_toggle(&PORTB,LED_D2);
+	    GPIO_toggle(&PORTB,LED_D3);
+    }
+    else if(i == 4)
+    {
+	    GPIO_toggle(&PORTB,LED_D3);
+	    GPIO_toggle(&PORTB,LED_D4);
+    }
+    
+    else if(i == 5)
+    {
+	    GPIO_toggle(&PORTB,LED_D4);
+	    GPIO_toggle(&PORTB,LED_D3);
+    }
+    else if(i == 6)
+    {
+	    GPIO_toggle(&PORTB,LED_D3);
+	    GPIO_toggle(&PORTB,LED_D2);
+    }
+    else if(i == 7)
+    {
+	    GPIO_toggle(&PORTB,LED_D2);
+		GPIO_toggle(&PORTB,LED_D1);
+    }
+    else if(i == 8)
+    {
+	    GPIO_toggle(&PORTB,LED_D1);
+    }    
 }

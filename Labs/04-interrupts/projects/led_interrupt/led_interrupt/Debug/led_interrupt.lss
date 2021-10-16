@@ -3,31 +3,31 @@ led_interrupt.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000286  2**0
+  0 .data         00000000  00800100  00800100  00000330  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000212  00000000  00000000  00000074  2**1
+  1 .text         000002bc  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800100  00800100  00000286  2**0
+  2 .bss          00000002  00800100  00800100  00000330  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000286  2**0
+  3 .comment      00000030  00000000  00000000  00000330  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002b8  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000360  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000078  00000000  00000000  000002f8  2**0
+  5 .debug_aranges 00000078  00000000  00000000  000003a0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000a31  00000000  00000000  00000370  2**0
+  6 .debug_info   00000b99  00000000  00000000  00000418  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000006f4  00000000  00000000  00000da1  2**0
+  7 .debug_abbrev 000006f4  00000000  00000000  00000fb1  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000003ad  00000000  00000000  00001495  2**0
+  8 .debug_line   00000419  00000000  00000000  000016a5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000100  00000000  00000000  00001844  2**2
+  9 .debug_frame  00000100  00000000  00000000  00001ac0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000040c  00000000  00000000  00001944  2**0
+ 10 .debug_str    0000040c  00000000  00000000  00001bc0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000015d  00000000  00000000  00001d50  2**0
+ 11 .debug_loc    0000015d  00000000  00000000  00001fcc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000058  00000000  00000000  00001ead  2**0
+ 12 .debug_ranges 00000058  00000000  00000000  00002129  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -82,7 +82,7 @@ Disassembly of section .text:
   80:	b2 07       	cpc	r27, r18
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
   84:	0e 94 78 00 	call	0xf0	; 0xf0 <main>
-  88:	0c 94 07 01 	jmp	0x20e	; 0x20e <_exit>
+  88:	0c 94 5c 01 	jmp	0x2b8	; 0x2b8 <_exit>
 
 0000008c <__bad_interrupt>:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -310,7 +310,7 @@ ISR(TIMER1_OVF_vect)
       i=0;
  1ba:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
  1be:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
- 1c2:	07 c0       	rjmp	.+14     	; 0x1d2 <__vector_13+0x48>
+ 1c2:	69 c0       	rjmp	.+210    	; 0x296 <__vector_13+0x10c>
     }
     else
     {
@@ -320,53 +320,152 @@ ISR(TIMER1_OVF_vect)
  1ca:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
     }         
 
-    if(i == 0)
- 1ce:	00 97       	sbiw	r24, 0x00	; 0
- 1d0:	31 f4       	brne	.+12     	; 0x1de <__vector_13+0x54>
+    if(i == 1)
+ 1ce:	81 30       	cpi	r24, 0x01	; 1
+ 1d0:	91 05       	cpc	r25, r1
+ 1d2:	31 f4       	brne	.+12     	; 0x1e0 <__vector_13+0x56>
     {
         GPIO_toggle(&PORTB,LED_D1);
- 1d2:	65 e0       	ldi	r22, 0x05	; 5
- 1d4:	85 e2       	ldi	r24, 0x25	; 37
- 1d6:	90 e0       	ldi	r25, 0x00	; 0
- 1d8:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
- 1dc:	07 c0       	rjmp	.+14     	; 0x1ec <__vector_13+0x62>
+ 1d4:	65 e0       	ldi	r22, 0x05	; 5
+ 1d6:	85 e2       	ldi	r24, 0x25	; 37
+ 1d8:	90 e0       	ldi	r25, 0x00	; 0
+ 1da:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+ 1de:	5b c0       	rjmp	.+182    	; 0x296 <__vector_13+0x10c>
     }
-    else if(i == 1)
- 1de:	01 97       	sbiw	r24, 0x01	; 1
- 1e0:	29 f4       	brne	.+10     	; 0x1ec <__vector_13+0x62>
+    else if(i == 2)
+ 1e0:	82 30       	cpi	r24, 0x02	; 2
+ 1e2:	91 05       	cpc	r25, r1
+ 1e4:	59 f4       	brne	.+22     	; 0x1fc <__vector_13+0x72>
     {
-	    //GPIO_toggle(&PORTB,LED_D1);
+	    GPIO_toggle(&PORTB,LED_D1);
+ 1e6:	65 e0       	ldi	r22, 0x05	; 5
+ 1e8:	85 e2       	ldi	r24, 0x25	; 37
+ 1ea:	90 e0       	ldi	r25, 0x00	; 0
+ 1ec:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+	    GPIO_toggle(&PORTB,LED_D2);
+ 1f0:	64 e0       	ldi	r22, 0x04	; 4
+ 1f2:	85 e2       	ldi	r24, 0x25	; 37
+ 1f4:	90 e0       	ldi	r25, 0x00	; 0
+ 1f6:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+ 1fa:	4d c0       	rjmp	.+154    	; 0x296 <__vector_13+0x10c>
+    }
+    else if(i == 3)
+ 1fc:	83 30       	cpi	r24, 0x03	; 3
+ 1fe:	91 05       	cpc	r25, r1
+ 200:	59 f4       	brne	.+22     	; 0x218 <__vector_13+0x8e>
+    {
+	    GPIO_toggle(&PORTB,LED_D2);
+ 202:	64 e0       	ldi	r22, 0x04	; 4
+ 204:	85 e2       	ldi	r24, 0x25	; 37
+ 206:	90 e0       	ldi	r25, 0x00	; 0
+ 208:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+	    GPIO_toggle(&PORTB,LED_D3);
+ 20c:	63 e0       	ldi	r22, 0x03	; 3
+ 20e:	85 e2       	ldi	r24, 0x25	; 37
+ 210:	90 e0       	ldi	r25, 0x00	; 0
+ 212:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+ 216:	3f c0       	rjmp	.+126    	; 0x296 <__vector_13+0x10c>
+    }
+    else if(i == 4)
+ 218:	84 30       	cpi	r24, 0x04	; 4
+ 21a:	91 05       	cpc	r25, r1
+ 21c:	59 f4       	brne	.+22     	; 0x234 <__vector_13+0xaa>
+    {
+	    GPIO_toggle(&PORTB,LED_D3);
+ 21e:	63 e0       	ldi	r22, 0x03	; 3
+ 220:	85 e2       	ldi	r24, 0x25	; 37
+ 222:	90 e0       	ldi	r25, 0x00	; 0
+ 224:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
 	    GPIO_toggle(&PORTB,LED_D4);
- 1e2:	62 e0       	ldi	r22, 0x02	; 2
- 1e4:	85 e2       	ldi	r24, 0x25	; 37
- 1e6:	90 e0       	ldi	r25, 0x00	; 0
- 1e8:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
-    //else if(i == 8)
-    //{
-	    //GPIO_toggle(&PORTB,LED_D1);
-    //}    
-
+ 228:	62 e0       	ldi	r22, 0x02	; 2
+ 22a:	85 e2       	ldi	r24, 0x25	; 37
+ 22c:	90 e0       	ldi	r25, 0x00	; 0
+ 22e:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+ 232:	31 c0       	rjmp	.+98     	; 0x296 <__vector_13+0x10c>
+    }
+    
+    else if(i == 5)
+ 234:	85 30       	cpi	r24, 0x05	; 5
+ 236:	91 05       	cpc	r25, r1
+ 238:	59 f4       	brne	.+22     	; 0x250 <__vector_13+0xc6>
+    {
+	    GPIO_toggle(&PORTB,LED_D4);
+ 23a:	62 e0       	ldi	r22, 0x02	; 2
+ 23c:	85 e2       	ldi	r24, 0x25	; 37
+ 23e:	90 e0       	ldi	r25, 0x00	; 0
+ 240:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+	    GPIO_toggle(&PORTB,LED_D3);
+ 244:	63 e0       	ldi	r22, 0x03	; 3
+ 246:	85 e2       	ldi	r24, 0x25	; 37
+ 248:	90 e0       	ldi	r25, 0x00	; 0
+ 24a:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+ 24e:	23 c0       	rjmp	.+70     	; 0x296 <__vector_13+0x10c>
+    }
+    else if(i == 6)
+ 250:	86 30       	cpi	r24, 0x06	; 6
+ 252:	91 05       	cpc	r25, r1
+ 254:	59 f4       	brne	.+22     	; 0x26c <__vector_13+0xe2>
+    {
+	    GPIO_toggle(&PORTB,LED_D3);
+ 256:	63 e0       	ldi	r22, 0x03	; 3
+ 258:	85 e2       	ldi	r24, 0x25	; 37
+ 25a:	90 e0       	ldi	r25, 0x00	; 0
+ 25c:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+	    GPIO_toggle(&PORTB,LED_D2);
+ 260:	64 e0       	ldi	r22, 0x04	; 4
+ 262:	85 e2       	ldi	r24, 0x25	; 37
+ 264:	90 e0       	ldi	r25, 0x00	; 0
+ 266:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+ 26a:	15 c0       	rjmp	.+42     	; 0x296 <__vector_13+0x10c>
+    }
+    else if(i == 7)
+ 26c:	87 30       	cpi	r24, 0x07	; 7
+ 26e:	91 05       	cpc	r25, r1
+ 270:	59 f4       	brne	.+22     	; 0x288 <__vector_13+0xfe>
+    {
+	    GPIO_toggle(&PORTB,LED_D2);
+ 272:	64 e0       	ldi	r22, 0x04	; 4
+ 274:	85 e2       	ldi	r24, 0x25	; 37
+ 276:	90 e0       	ldi	r25, 0x00	; 0
+ 278:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+		GPIO_toggle(&PORTB,LED_D1);
+ 27c:	65 e0       	ldi	r22, 0x05	; 5
+ 27e:	85 e2       	ldi	r24, 0x25	; 37
+ 280:	90 e0       	ldi	r25, 0x00	; 0
+ 282:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+ 286:	07 c0       	rjmp	.+14     	; 0x296 <__vector_13+0x10c>
+    }
+    else if(i == 8)
+ 288:	08 97       	sbiw	r24, 0x08	; 8
+ 28a:	29 f4       	brne	.+10     	; 0x296 <__vector_13+0x10c>
+    {
+	    GPIO_toggle(&PORTB,LED_D1);
+ 28c:	65 e0       	ldi	r22, 0x05	; 5
+ 28e:	85 e2       	ldi	r24, 0x25	; 37
+ 290:	90 e0       	ldi	r25, 0x00	; 0
+ 292:	0e 94 61 00 	call	0xc2	; 0xc2 <GPIO_toggle>
+    }    
 }
- 1ec:	ff 91       	pop	r31
- 1ee:	ef 91       	pop	r30
- 1f0:	bf 91       	pop	r27
- 1f2:	af 91       	pop	r26
- 1f4:	9f 91       	pop	r25
- 1f6:	8f 91       	pop	r24
- 1f8:	7f 91       	pop	r23
- 1fa:	6f 91       	pop	r22
- 1fc:	5f 91       	pop	r21
- 1fe:	4f 91       	pop	r20
- 200:	3f 91       	pop	r19
- 202:	2f 91       	pop	r18
- 204:	0f 90       	pop	r0
- 206:	0f be       	out	0x3f, r0	; 63
- 208:	0f 90       	pop	r0
- 20a:	1f 90       	pop	r1
- 20c:	18 95       	reti
+ 296:	ff 91       	pop	r31
+ 298:	ef 91       	pop	r30
+ 29a:	bf 91       	pop	r27
+ 29c:	af 91       	pop	r26
+ 29e:	9f 91       	pop	r25
+ 2a0:	8f 91       	pop	r24
+ 2a2:	7f 91       	pop	r23
+ 2a4:	6f 91       	pop	r22
+ 2a6:	5f 91       	pop	r21
+ 2a8:	4f 91       	pop	r20
+ 2aa:	3f 91       	pop	r19
+ 2ac:	2f 91       	pop	r18
+ 2ae:	0f 90       	pop	r0
+ 2b0:	0f be       	out	0x3f, r0	; 63
+ 2b2:	0f 90       	pop	r0
+ 2b4:	1f 90       	pop	r1
+ 2b6:	18 95       	reti
 
-0000020e <_exit>:
- 20e:	f8 94       	cli
+000002b8 <_exit>:
+ 2b8:	f8 94       	cli
 
-00000210 <__stop_program>:
- 210:	ff cf       	rjmp	.-2      	; 0x210 <__stop_program>
+000002ba <__stop_program>:
+ 2ba:	ff cf       	rjmp	.-2      	; 0x2ba <__stop_program>
