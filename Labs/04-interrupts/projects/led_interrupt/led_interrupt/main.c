@@ -37,13 +37,13 @@ int main(void)
     GPIO_write_low(&PORTB, LED_D1);
 
     GPIO_config_output(&DDRB, LED_D2);
-    GPIO_write_high(&PORTB, LED_D2);
+    GPIO_write_low(&PORTB, LED_D2);
 
     GPIO_config_output(&DDRB, LED_D3);
-    GPIO_write_high(&PORTB, LED_D3);
+    GPIO_write_low(&PORTB, LED_D3);
 
     GPIO_config_output(&DDRB, LED_D4);
-    GPIO_write_high(&PORTB, LED_D4);
+    GPIO_write_low(&PORTB, LED_D4);
 
     // Configuration of 16-bit Timer/Counter1 for LED blinking
     // Set the overflow prescaler to 262 ms and enable interrupt
@@ -83,7 +83,7 @@ int main(void)
  **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
-  static uint16_t i=1;
+  static uint16_t i=0;
     if(i>=8)
     {
       i=0;
@@ -92,50 +92,50 @@ ISR(TIMER1_OVF_vect)
     {
       i++;
     }         
-    
-    //if(i == 0)
-    //{
-    //    GPIO_toggle(&PORTB,LED_D1);
-    //} 
-    else if(i == 1)
+
+    if(i == 0)
     {
         GPIO_toggle(&PORTB,LED_D1);
-        GPIO_toggle(&PORTB,LED_D2);
+    }
+    else if(i == 1)
+    {
+	    //GPIO_toggle(&PORTB,LED_D1);
+	    GPIO_toggle(&PORTB,LED_D4);
     }
     else if(i == 2)
     {
-        GPIO_toggle(&PORTB,LED_D2);
-        GPIO_toggle(&PORTB,LED_D3);
+	   // GPIO_toggle(&PORTB,LED_D2);
+	    //GPIO_toggle(&PORTB,LED_D3);
     }
-    else if(i == 3)
-    {
-        GPIO_toggle(&PORTB,LED_D3);
-        GPIO_toggle(&PORTB,LED_D4);
-    }
-    else if(i == 4)
-    {
-        GPIO_toggle(&PORTB,LED_D4);
-        GPIO_toggle(&PORTB,LED_D4);
-    }
-    //
-    else if(i == 5)
-    {
-        GPIO_toggle(&PORTB,LED_D4);
-        GPIO_toggle(&PORTB,LED_D3);
-    }
-    else if(i == 6)
-    {
-        GPIO_toggle(&PORTB,LED_D3);
-        GPIO_toggle(&PORTB,LED_D2);
-    }
-    else if(i == 7)
-    {
-        GPIO_toggle(&PORTB,LED_D2);
-        GPIO_toggle(&PORTB,LED_D1);
-    }
-    else if(i == 8)
-    {
-        GPIO_toggle(&PORTB,LED_D1);
-        GPIO_toggle(&PORTB,LED_D1);
-    }
+    //else if(i == 3)
+    //{
+	    //GPIO_toggle(&PORTB,LED_D3);
+	    //GPIO_toggle(&PORTB,LED_D4);
+    //}
+////    else if(i == 4)
+  ////  {
+	////    GPIO_toggle(&PORTB,LED_D4);
+	  ////  GPIO_toggle(&PORTB,LED_D4);
+    ////}
+    ////
+    //else if(i == 5)
+    //{
+	    //GPIO_toggle(&PORTB,LED_D4);
+	    //GPIO_toggle(&PORTB,LED_D3);
+    //}
+    //else if(i == 6)
+    //{
+	    //GPIO_toggle(&PORTB,LED_D3);
+	    //GPIO_toggle(&PORTB,LED_D2);
+    //}
+    //else if(i == 7)
+    //{
+	    //GPIO_toggle(&PORTB,LED_D2);
+	    //GPIO_toggle(&PORTB,LED_D1);
+    //}
+    //else if(i == 8)
+    //{
+	    //GPIO_toggle(&PORTB,LED_D1);
+    //}    
+
 }
