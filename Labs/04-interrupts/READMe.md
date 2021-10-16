@@ -7,7 +7,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 ### Overflow times
 
-1. Complete table with overflow times.
+1. Completed table with overflow times.
 
 | **Module** | **Number of bits** | **1** | **8** | **32** | **64** | **128** | **256** | **1024** |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -17,7 +17,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 ### Timer library
 
-1. In your words, describe the difference between common C function and interrupt service routine.
+1. Description of the difference between common C function and interrupt service routine.
    * Function -- Function is something that makes some process which can be programmed to do something.
    * Interrupt service routine –- Interrupt is something that can stop the function process and do different process, which can be also programmed.
 
@@ -46,13 +46,13 @@ Link to my `Digital-electronics-2` GitHub repository:
 #define TIM0_overflow_interrupt_disable() TIMSK0 &= ~(1<<TOIE0);
 ```
 
-3. Flowchart figure for function `main()` and interrupt service routine `ISR(TIMER1_OVF_vect)` of application that ensures the flashing of one LED in the timer interruption. When the button is pressed, the blinking is faster, when the button is released, it is slower. Use only a timer overflow and not a delay library.
+3. Flowchart figure for function `main()` and interrupt service routine `ISR(TIMER1_OVF_vect)` of application that ensures the flashing of one LED in the timer interruption. When the button is pressed, the blinking is faster, when the button is released, it is slower.
 
    ![my figure](images/flowchart.png)
 
 ### Knight Rider
 
-1. Scheme of Knight Rider application with four LEDs and a push button, connected according to Multi-function shield. Connect AVR device, LEDs, resistors, push button, and supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values!
+1. Scheme of Knight Rider application with four LEDs and a push button, connected according to Multi-function shield.
 
    ![my figure](images/knight_rider.png)
 
