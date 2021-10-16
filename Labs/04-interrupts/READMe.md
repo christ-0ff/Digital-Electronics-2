@@ -1,82 +1,53 @@
-# Lab 3: Kryštof Buroň
+# Lab 4: Kryštof Buroň
 
 Link to my `Digital-electronics-2` GitHub repository:
 
    [https://github.com/christ-0ff/Digital-Electronics-2](https://github.com/christ-0ff/Digital-Electronics-2)
 
-### Data types in C
 
-1. Completed table.
+### Overflow times
 
-| **Data type** | **Number of bits** | **Range** | **Description** |
-| :-: | :-: | :-: | :-- | 
-| `uint8_t`  | 8 | 0, 1, ..., 255 | Unsigned 8-bit integer |
-| `int8_t`   | 8 | -128 - 0 - 127 | Signed 8-bit integer |
-| `uint16_t` | 16 | 0 - 65.535 | Unsigned 16-bit integer |
-| `int16_t`  | 16 | -32.768 - 0 - 32.767 | Signed 16-bit integer |
-| `float`    | 32 | -3.4e+38, ..., 3.4e+38 | Single-precision floating-point |
-| `void`     | 0 | 0 | Void returns void "nothing" |
+1. Complete table with overflow times.
+
+| **Module** | **Number of bits** | **1** | **8** | **32** | **64** | **128** | **256** | **1024** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Timer/Counter0 | 8  | 16u | 128u | -- | | -- | | |
+| Timer/Counter1 | 16 |     |      | -- | | -- | | |
+| Timer/Counter2 | 8  |     |      |    | |    | | |
 
 
-### GPIO library
+### Timer library
 
-1. Description of the difference between the declaration and the definition of the function in C:
+1. In your words, describe the difference between common C function and interrupt service routine.
+   * Function -- Function is something that makes some process which can be programmed to do something.
+   * Interrupt service routine –- Interrupt is something that can stop the function process and do different process, which can be also programmed.
 
-   * Function declaration - Function declaration gives us information about function itself. It gives us return type of the function, name of the function, and parameters which are used by the function(if there are any/function does not need to contain any parameters).
-   
-   * Function definition - Function definition gives us same information about function as function declaration, but in addition it contains body of the function. Body of the function contains a collection of statements that tells us what the function does.
-
-2. Part of the C code listing with syntax highlighting, which toggles LEDs only if push button is pressed. Otherwise, the value of the LEDs does not change. Use function from your GPIO library. Let the push button is connected to port D:
+2. Part of the header file listing with syntax highlighting, which defines settings for Timer/Counter0:
 
 ```c
-/* Defines -----------------------------------------------------------*/
-#define LED_GREEN   PB5     // AVR pin where green LED is connected
-#define LED_RED     PC5  
-#define BUTTON      PD0
-
-/* Includes ----------------------------------------------------------*/
-#include <util/delay.h>     // Functions for busy-wait delay loops
-#include <avr/io.h>         // AVR device-specific IO definitions
-#include <avr/sfr_defs.h>
-#include "gpio.h"           // GPIO library for AVR-GCC
-
-int main(void)
-{
-    // Green LED at port B
-    GPIO_config_output(&DDRB, LED_GREEN);
-    GPIO_write_low(&PORTB, LED_GREEN);
-
-    // Configure the second LED at port C
-    GPIO_config_output(&DDRC, LED_RED);
-    GPIO_write_high(&PORTC, LED_RED);
-
-    // Configure Push button at port D and enable internal pull-up resistor
-    GPIO_config_input_pullup(&DDRD, BUTTON);
-
-    // Infinite loop
-    while (1)
-    {
-        
-        if(bit_is_clear(PIND, BUTTON))
-        {
-            // Pause several milliseconds
-            _delay_ms(BLINK_DELAY);
-            
-            GPIO_toggle(&PORTB, LED_GREEN);
-            GPIO_toggle(&PORTC, LED_RED);
-            loop_until_bit_is_set(PIND, BUTTON);
-        }
-    }
-
-    // Will never reach this
-    return 0;
-}
+/**
+ * @name  Definitions of Timer/Counter0
+ * @note  F_CPU = 16 MHz
+ */
+// WRITE YOUR CODE HERE
 ```
 
+3. Flowchart figure for function `main()` and interrupt service routine `ISR(TIMER1_OVF_vect)` of application that ensures the flashing of one LED in the timer interruption. When the button is pressed, the blinking is faster, when the button is released, it is slower. Use only a timer overflow and not a delay library.
 
-### Traffic light
+   ![your figure]()
 
-1. Scheme of traffic light application with one red/yellow/green light for cars and one red/green light for pedestrians. Connect AVR device, LEDs, resistors, one push button (for pedestrians), and supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values!
 
-   ![traffic_lights](images/traffic_lights.png)
+### Knight Rider
 
+1. Scheme of Knight Rider application with four LEDs and a push button, connected according to Multi-function shield. Connect AVR device, LEDs, resistors, push button, and supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values!
+
+   ![your figure]()
+
+
+
+
+| **Module** | **Operation** | **I/O register(s)** | **Bit(s)** |
+| :-: | :-- | :-: | :-- |
+| Timer/Counter0 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable | TCCR0B<br><br>TCNT0<br>TIMSK0 | CS02, CS01, CS00<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT0[7:0]<br>TOIE0 (1: enable, 0: disable) |
+| Timer/Counter1 | Prescaler<br><br>16-bit data value<br>Overflow interrupt enable | TCCR1B<br><br>TCNT1H, TCNT1L<br>TIMSK1 | CS12, CS11, CS10<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT1[15:0]<br>TOIE1 (1: enable, 0: disable) |
+| Timer/Counter2 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable | TCCR2B<br><br>TCNT2<br><br>TIMSK2 | CS22, CS21, CS20<br>(000: stopped, 001: 1, 010: 8, 011: 32, 100: 64, 101: 128, 110: 256, 111: 1024)<br>TCNT2[7:0]<br>TOIE2 (1: enable, 0: disable) |
