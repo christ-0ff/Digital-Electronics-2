@@ -3,31 +3,31 @@
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000010  00800100  00000318  000003ac  2**0
+  0 .data         00000010  00800100  00000310  000003a4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000318  00000000  00000000  00000094  2**1
+  1 .text         00000310  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000004  00800110  00800110  000003bc  2**0
+  2 .bss          00000004  00800110  00800110  000003b4  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000003bc  2**0
+  3 .comment      00000030  00000000  00000000  000003b4  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003ec  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003e4  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a8  00000000  00000000  0000042c  2**0
+  5 .debug_aranges 000000b0  00000000  00000000  00000424  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000dfc  00000000  00000000  000004d4  2**0
+  6 .debug_info   00000f39  00000000  00000000  000004d4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000087b  00000000  00000000  000012d0  2**0
+  7 .debug_abbrev 0000087b  00000000  00000000  0000140d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000594  00000000  00000000  00001b4b  2**0
+  8 .debug_line   0000061c  00000000  00000000  00001c88  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000170  00000000  00000000  000020e0  2**2
+  9 .debug_frame  00000180  00000000  00000000  000022a4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000004d6  00000000  00000000  00002250  2**0
+ 10 .debug_str    000004d9  00000000  00000000  00002424  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000422  00000000  00000000  00002726  2**0
+ 11 .debug_loc    000004aa  00000000  00000000  000028fd  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000078  00000000  00000000  00002b48  2**0
+ 12 .debug_ranges 00000080  00000000  00000000  00002da7  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -46,10 +46,10 @@ Disassembly of section .text:
   28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  34:	0c 94 1b 01 	jmp	0x236	; 0x236 <__vector_13>
+  34:	0c 94 17 01 	jmp	0x22e	; 0x22e <__vector_13>
   38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  40:	0c 94 52 01 	jmp	0x2a4	; 0x2a4 <__vector_16>
+  40:	0c 94 4e 01 	jmp	0x29c	; 0x29c <__vector_16>
   44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -72,7 +72,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e8 e1       	ldi	r30, 0x18	; 24
+  7a:	e0 e1       	ldi	r30, 0x10	; 16
   7c:	f3 e0       	ldi	r31, 0x03	; 3
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -95,7 +95,7 @@ Disassembly of section .text:
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
   9a:	0e 94 fb 00 	call	0x1f6	; 0x1f6 <main>
-  9e:	0c 94 8a 01 	jmp	0x314	; 0x314 <_exit>
+  9e:	0c 94 86 01 	jmp	0x30c	; 0x30c <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -401,179 +401,174 @@ int main(void)
  1fa:	60 e0       	ldi	r22, 0x00	; 0
  1fc:	83 e0       	ldi	r24, 0x03	; 3
  1fe:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
-    
-    // Configure 16-bit Timer/Counter1 for Decimal counter
-    // Set the overflow prescaler to 262 ms and enable interrupt
-    TIM1_overflow_262ms();
- 202:	e1 e8       	ldi	r30, 0x81	; 129
- 204:	f0 e0       	ldi	r31, 0x00	; 0
- 206:	80 81       	ld	r24, Z
- 208:	8b 7f       	andi	r24, 0xFB	; 251
- 20a:	80 83       	st	Z, r24
- 20c:	80 81       	ld	r24, Z
- 20e:	83 60       	ori	r24, 0x03	; 3
- 210:	80 83       	st	Z, r24
-    TIM1_overflow_interrupt_enable();
- 212:	ef e6       	ldi	r30, 0x6F	; 111
- 214:	f0 e0       	ldi	r31, 0x00	; 0
- 216:	80 81       	ld	r24, Z
- 218:	81 60       	ori	r24, 0x01	; 1
- 21a:	80 83       	st	Z, r24
-    
-    TIM0_overflow_4ms();
- 21c:	85 b5       	in	r24, 0x25	; 37
- 21e:	8c 7f       	andi	r24, 0xFC	; 252
- 220:	85 bd       	out	0x25, r24	; 37
- 222:	85 b5       	in	r24, 0x25	; 37
- 224:	84 60       	ori	r24, 0x04	; 4
- 226:	85 bd       	out	0x25, r24	; 37
-    TIM0_overflow_interrupt_enable();
- 228:	ee e6       	ldi	r30, 0x6E	; 110
- 22a:	f0 e0       	ldi	r31, 0x00	; 0
- 22c:	80 81       	ld	r24, Z
- 22e:	81 60       	ori	r24, 0x01	; 1
- 230:	80 83       	st	Z, r24
+    //
+    //TIM0_overflow_4ms();
+    //TIM0_overflow_interrupt_enable();
     // Enables interrupts by setting the global interrupt mask
     
     sei();
- 232:	78 94       	sei
- 234:	ff cf       	rjmp	.-2      	; 0x234 <main+0x3e>
+ 202:	78 94       	sei
 
-00000236 <__vector_13>:
+    // Infinite loop
+    while (1)
+    {
+    SEG_update_shift_regs(9,0);
+ 204:	60 e0       	ldi	r22, 0x00	; 0
+ 206:	89 e0       	ldi	r24, 0x09	; 9
+ 208:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
+    SEG_update_shift_regs(5,1);
+ 20c:	61 e0       	ldi	r22, 0x01	; 1
+ 20e:	85 e0       	ldi	r24, 0x05	; 5
+ 210:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
+    SEG_update_shift_regs(11,2);
+ 214:	62 e0       	ldi	r22, 0x02	; 2
+ 216:	8b e0       	ldi	r24, 0x0B	; 11
+ 218:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
+    SEG_update_shift_regs(9,2);
+ 21c:	62 e0       	ldi	r22, 0x02	; 2
+ 21e:	89 e0       	ldi	r24, 0x09	; 9
+ 220:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
+    SEG_update_shift_regs(5,3);
+ 224:	63 e0       	ldi	r22, 0x03	; 3
+ 226:	85 e0       	ldi	r24, 0x05	; 5
+ 228:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
+ 22c:	eb cf       	rjmp	.-42     	; 0x204 <main+0xe>
+
+0000022e <__vector_13>:
 /**********************************************************************
  * Function: Timer/Counter1 overflow interrupt
  * Purpose:  Increment decimal counter value and display it on SSD.
  **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
- 236:	1f 92       	push	r1
- 238:	0f 92       	push	r0
- 23a:	0f b6       	in	r0, 0x3f	; 63
- 23c:	0f 92       	push	r0
- 23e:	11 24       	eor	r1, r1
- 240:	2f 93       	push	r18
- 242:	8f 93       	push	r24
- 244:	9f 93       	push	r25
+ 22e:	1f 92       	push	r1
+ 230:	0f 92       	push	r0
+ 232:	0f b6       	in	r0, 0x3f	; 63
+ 234:	0f 92       	push	r0
+ 236:	11 24       	eor	r1, r1
+ 238:	2f 93       	push	r18
+ 23a:	8f 93       	push	r24
+ 23c:	9f 93       	push	r25
     if(citac <= 59)
- 246:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <citac>
- 24a:	8c 33       	cpi	r24, 0x3C	; 60
- 24c:	08 f5       	brcc	.+66     	; 0x290 <__vector_13+0x5a>
+ 23e:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <citac>
+ 242:	8c 33       	cpi	r24, 0x3C	; 60
+ 244:	08 f5       	brcc	.+66     	; 0x288 <__vector_13+0x5a>
     {
     citac++;    
- 24e:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <citac>
- 252:	8f 5f       	subi	r24, 0xFF	; 255
- 254:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <citac>
-    digit0 = citac / 10;
- 258:	90 91 12 01 	lds	r25, 0x0112	; 0x800112 <citac>
- 25c:	8d ec       	ldi	r24, 0xCD	; 205
- 25e:	98 9f       	mul	r25, r24
- 260:	91 2d       	mov	r25, r1
- 262:	11 24       	eor	r1, r1
- 264:	96 95       	lsr	r25
- 266:	96 95       	lsr	r25
- 268:	96 95       	lsr	r25
- 26a:	90 93 11 01 	sts	0x0111, r25	; 0x800111 <digit0>
-    digit1 = citac % 10;
- 26e:	20 91 12 01 	lds	r18, 0x0112	; 0x800112 <citac>
- 272:	28 9f       	mul	r18, r24
- 274:	81 2d       	mov	r24, r1
- 276:	11 24       	eor	r1, r1
- 278:	86 95       	lsr	r24
- 27a:	86 95       	lsr	r24
- 27c:	86 95       	lsr	r24
- 27e:	88 0f       	add	r24, r24
- 280:	98 2f       	mov	r25, r24
- 282:	99 0f       	add	r25, r25
- 284:	99 0f       	add	r25, r25
- 286:	89 0f       	add	r24, r25
- 288:	28 1b       	sub	r18, r24
- 28a:	20 93 13 01 	sts	0x0113, r18	; 0x800113 <digit1>
- 28e:	02 c0       	rjmp	.+4      	; 0x294 <__vector_13+0x5e>
+ 246:	80 91 12 01 	lds	r24, 0x0112	; 0x800112 <citac>
+ 24a:	8f 5f       	subi	r24, 0xFF	; 255
+ 24c:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <citac>
+    digit1 = citac / 10;
+ 250:	90 91 12 01 	lds	r25, 0x0112	; 0x800112 <citac>
+ 254:	8d ec       	ldi	r24, 0xCD	; 205
+ 256:	98 9f       	mul	r25, r24
+ 258:	91 2d       	mov	r25, r1
+ 25a:	11 24       	eor	r1, r1
+ 25c:	96 95       	lsr	r25
+ 25e:	96 95       	lsr	r25
+ 260:	96 95       	lsr	r25
+ 262:	90 93 13 01 	sts	0x0113, r25	; 0x800113 <digit1>
+    digit0 = citac % 10;
+ 266:	20 91 12 01 	lds	r18, 0x0112	; 0x800112 <citac>
+ 26a:	28 9f       	mul	r18, r24
+ 26c:	81 2d       	mov	r24, r1
+ 26e:	11 24       	eor	r1, r1
+ 270:	86 95       	lsr	r24
+ 272:	86 95       	lsr	r24
+ 274:	86 95       	lsr	r24
+ 276:	88 0f       	add	r24, r24
+ 278:	98 2f       	mov	r25, r24
+ 27a:	99 0f       	add	r25, r25
+ 27c:	99 0f       	add	r25, r25
+ 27e:	89 0f       	add	r24, r25
+ 280:	28 1b       	sub	r18, r24
+ 282:	20 93 11 01 	sts	0x0111, r18	; 0x800111 <digit0>
+ 286:	02 c0       	rjmp	.+4      	; 0x28c <__vector_13+0x5e>
     }
     
     else
     {
     citac = 0;
- 290:	10 92 12 01 	sts	0x0112, r1	; 0x800112 <citac>
+ 288:	10 92 12 01 	sts	0x0112, r1	; 0x800112 <citac>
     }
 }
- 294:	9f 91       	pop	r25
- 296:	8f 91       	pop	r24
- 298:	2f 91       	pop	r18
- 29a:	0f 90       	pop	r0
- 29c:	0f be       	out	0x3f, r0	; 63
- 29e:	0f 90       	pop	r0
- 2a0:	1f 90       	pop	r1
- 2a2:	18 95       	reti
+ 28c:	9f 91       	pop	r25
+ 28e:	8f 91       	pop	r24
+ 290:	2f 91       	pop	r18
+ 292:	0f 90       	pop	r0
+ 294:	0f be       	out	0x3f, r0	; 63
+ 296:	0f 90       	pop	r0
+ 298:	1f 90       	pop	r1
+ 29a:	18 95       	reti
 
-000002a4 <__vector_16>:
+0000029c <__vector_16>:
 
 ISR(TIMER0_OVF_vect)
 {
- 2a4:	1f 92       	push	r1
- 2a6:	0f 92       	push	r0
- 2a8:	0f b6       	in	r0, 0x3f	; 63
- 2aa:	0f 92       	push	r0
- 2ac:	11 24       	eor	r1, r1
- 2ae:	2f 93       	push	r18
- 2b0:	3f 93       	push	r19
- 2b2:	4f 93       	push	r20
- 2b4:	5f 93       	push	r21
- 2b6:	6f 93       	push	r22
- 2b8:	7f 93       	push	r23
- 2ba:	8f 93       	push	r24
- 2bc:	9f 93       	push	r25
- 2be:	af 93       	push	r26
- 2c0:	bf 93       	push	r27
- 2c2:	ef 93       	push	r30
- 2c4:	ff 93       	push	r31
+ 29c:	1f 92       	push	r1
+ 29e:	0f 92       	push	r0
+ 2a0:	0f b6       	in	r0, 0x3f	; 63
+ 2a2:	0f 92       	push	r0
+ 2a4:	11 24       	eor	r1, r1
+ 2a6:	2f 93       	push	r18
+ 2a8:	3f 93       	push	r19
+ 2aa:	4f 93       	push	r20
+ 2ac:	5f 93       	push	r21
+ 2ae:	6f 93       	push	r22
+ 2b0:	7f 93       	push	r23
+ 2b2:	8f 93       	push	r24
+ 2b4:	9f 93       	push	r25
+ 2b6:	af 93       	push	r26
+ 2b8:	bf 93       	push	r27
+ 2ba:	ef 93       	push	r30
+ 2bc:	ff 93       	push	r31
     static uint8_t pos = 0;
         if (pos == 0)
- 2c6:	80 91 10 01 	lds	r24, 0x0110	; 0x800110 <__data_end>
- 2ca:	81 11       	cpse	r24, r1
- 2cc:	0b c0       	rjmp	.+22     	; 0x2e4 <__vector_16+0x40>
+ 2be:	80 91 10 01 	lds	r24, 0x0110	; 0x800110 <__data_end>
+ 2c2:	81 11       	cpse	r24, r1
+ 2c4:	0b c0       	rjmp	.+22     	; 0x2dc <__vector_16+0x40>
         {
-            SEG_update_shift_regs(digit0, 1);
- 2ce:	80 91 11 01 	lds	r24, 0x0111	; 0x800111 <digit0>
- 2d2:	61 e0       	ldi	r22, 0x01	; 1
- 2d4:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
+            SEG_update_shift_regs(digit1, 1);
+ 2c6:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <digit1>
+ 2ca:	61 e0       	ldi	r22, 0x01	; 1
+ 2cc:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
             pos++;
- 2d8:	80 91 10 01 	lds	r24, 0x0110	; 0x800110 <__data_end>
- 2dc:	8f 5f       	subi	r24, 0xFF	; 255
- 2de:	80 93 10 01 	sts	0x0110, r24	; 0x800110 <__data_end>
- 2e2:	07 c0       	rjmp	.+14     	; 0x2f2 <__vector_16+0x4e>
+ 2d0:	80 91 10 01 	lds	r24, 0x0110	; 0x800110 <__data_end>
+ 2d4:	8f 5f       	subi	r24, 0xFF	; 255
+ 2d6:	80 93 10 01 	sts	0x0110, r24	; 0x800110 <__data_end>
+ 2da:	07 c0       	rjmp	.+14     	; 0x2ea <__vector_16+0x4e>
         }
         else
         { 
-            SEG_update_shift_regs(digit1, 0);
- 2e4:	80 91 13 01 	lds	r24, 0x0113	; 0x800113 <digit1>
- 2e8:	60 e0       	ldi	r22, 0x00	; 0
- 2ea:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
+            SEG_update_shift_regs(digit0, 0);
+ 2dc:	80 91 11 01 	lds	r24, 0x0111	; 0x800111 <digit0>
+ 2e0:	60 e0       	ldi	r22, 0x00	; 0
+ 2e2:	0e 94 88 00 	call	0x110	; 0x110 <SEG_update_shift_regs>
             pos = 0;      
- 2ee:	10 92 10 01 	sts	0x0110, r1	; 0x800110 <__data_end>
+ 2e6:	10 92 10 01 	sts	0x0110, r1	; 0x800110 <__data_end>
         }
        
 }
- 2f2:	ff 91       	pop	r31
- 2f4:	ef 91       	pop	r30
- 2f6:	bf 91       	pop	r27
- 2f8:	af 91       	pop	r26
- 2fa:	9f 91       	pop	r25
- 2fc:	8f 91       	pop	r24
- 2fe:	7f 91       	pop	r23
- 300:	6f 91       	pop	r22
- 302:	5f 91       	pop	r21
- 304:	4f 91       	pop	r20
- 306:	3f 91       	pop	r19
- 308:	2f 91       	pop	r18
- 30a:	0f 90       	pop	r0
- 30c:	0f be       	out	0x3f, r0	; 63
- 30e:	0f 90       	pop	r0
- 310:	1f 90       	pop	r1
- 312:	18 95       	reti
+ 2ea:	ff 91       	pop	r31
+ 2ec:	ef 91       	pop	r30
+ 2ee:	bf 91       	pop	r27
+ 2f0:	af 91       	pop	r26
+ 2f2:	9f 91       	pop	r25
+ 2f4:	8f 91       	pop	r24
+ 2f6:	7f 91       	pop	r23
+ 2f8:	6f 91       	pop	r22
+ 2fa:	5f 91       	pop	r21
+ 2fc:	4f 91       	pop	r20
+ 2fe:	3f 91       	pop	r19
+ 300:	2f 91       	pop	r18
+ 302:	0f 90       	pop	r0
+ 304:	0f be       	out	0x3f, r0	; 63
+ 306:	0f 90       	pop	r0
+ 308:	1f 90       	pop	r1
+ 30a:	18 95       	reti
 
-00000314 <_exit>:
- 314:	f8 94       	cli
+0000030c <_exit>:
+ 30c:	f8 94       	cli
 
-00000316 <__stop_program>:
- 316:	ff cf       	rjmp	.-2      	; 0x316 <__stop_program>
+0000030e <__stop_program>:
+ 30e:	ff cf       	rjmp	.-2      	; 0x30e <__stop_program>
