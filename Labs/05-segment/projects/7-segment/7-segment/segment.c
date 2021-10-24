@@ -155,3 +155,17 @@ void SEG_update_shift_regs(uint8_t segments, uint8_t position)
 /**********************************************************************
  * Function: SEG_clk_2us()
  **********************************************************************/
+void SEG_clk_2us(void)
+{
+    // Pull CLK high
+    GPIO_write_high(&PORTD, SEG_CLK);
+    
+    // Wait 1 us
+    _delay_us(1);
+    
+    // Pull CLK low
+    GPIO_write_low(&PORTD, SEG_CLK);
+        
+    // Wait 1 us
+    _delay_us(1);
+}

@@ -7,7 +7,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 ### 7-segment library
 
-1. In your words, describe the difference between Common Cathode and Common Anode 7-segment display.
+1. Description of the difference between Common Cathode and Common Anode 7-segment display:
    * CC SSD - Common cathode means that all cathodes of 7-segment are connected to the ground. Thus by applying logic 1 to a particular pin of one segment will make it shine.
    * CA SSD - Common anode means that all anodes are connected to high level of voltage source. So by applying logic low to a pin of a segment makes the segment glow. 
 
@@ -20,8 +20,17 @@ Link to my `Digital-electronics-2` GitHub repository:
  **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
-    // WRITE YOUR CODE HERE
-
+    if(citac <= 59)
+    {
+    citac++;    
+    digit1 = citac / 10;
+    digit0 = citac % 10;
+    }
+    
+    else
+    {
+    citac = 0;
+    }
 }
 ```
 
@@ -33,15 +42,21 @@ ISR(TIMER1_OVF_vect)
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t pos = 0;
-
-    // WRITE YOUR CODE HERE
-
+        if (pos == 0)
+        {
+            SEG_update_shift_regs(digit1, 1);
+            pos++;
+        }
+        else
+        { 
+            SEG_update_shift_regs(digit0, 0);
+            pos = 0;      
+        }
 }
 ```
 
-3. Flowchart figure for function `SEG_clk_2us()` which generates one clock period on `SEG_CLK` pin with a duration of 2&nbsp;us. The image can be drawn on a computer or by hand. Use clear descriptions of the individual steps of the algorithms.
-
-   ![your figure]()
+3. Flowchart figure for function `SEG_clk_2us()` which generates one clock period on `SEG_CLK` pin with a duration of 2&nbsp;us.
+   ![flowchart_figure](images/SEG_clk.png)
 
 
 ### Kitchen alarm
@@ -51,21 +66,3 @@ Consider a kitchen alarm with a 7-segment display, one LED and three push button
 1. Scheme of kitchen alarm; do not forget the supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values.
 
    ![your figure]()
-
-
-
-
-
-Addition
-   | **Digit** | **A** | **B** | **C** | **D** | **E** | **F** | **G** | **DP** |
-   | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-   | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
-   | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 |
-   | 2 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 1 |
-   | 3 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 1 |
-   | 4 |   |   |   |   |   |   |   | 1 |
-   | 5 |   |   |   |   |   |   |   | 1 |
-   | 6 |   |   |   |   |   |   |   | 1 |
-   | 7 |   |   |   |   |   |   |   | 1 |
-   | 8 |   |   |   |   |   |   |   | 1 |
-   | 9 |   |   |   |   |   |   |   | 1 |

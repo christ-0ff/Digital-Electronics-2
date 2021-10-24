@@ -71,8 +71,8 @@ ISR(TIMER1_OVF_vect)
     if(citac <= 59)
     {
     citac++;    
-    digit0 = citac / 10;
-    digit1 = citac % 10;
+    digit1 = citac / 10;
+    digit0 = citac % 10;
     }
     
     else
@@ -86,12 +86,12 @@ ISR(TIMER0_OVF_vect)
     static uint8_t pos = 0;
         if (pos == 0)
         {
-            SEG_update_shift_regs(digit0, 1);
+            SEG_update_shift_regs(digit1, 1);
             pos++;
         }
         else
         { 
-            SEG_update_shift_regs(digit1, 0);
+            SEG_update_shift_regs(digit0, 0);
             pos = 0;      
         }
        
