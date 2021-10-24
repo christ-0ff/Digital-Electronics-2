@@ -61,8 +61,8 @@ ISR(TIMER0_OVF_vect)
 
 ### Kitchen alarm
 
-Consider a kitchen alarm with a 7-segment display, one LED and three push buttons: start, +1 minute, -1 minute. Use the +1/-1 minute buttons to increment/decrement the timer value. After pressing the Start button, the countdown starts. The countdown value is shown on the display in the form of mm.ss (minutes.seconds). At the end of the countdown, the LED will start blinking.
+A kitchen alarm with a 7-segment display, one LED and three push buttons: start, +1 minute, -1 minute. The +1/-1 minute buttons are used to increment/decrement the timer value. After pressing the Start button, the countdown starts. The countdown value is shown on the display in the form of mm.ss (minutes.seconds). At the end of the countdown, the LED will start blinking.
 
-1. Scheme of kitchen alarm; do not forget the supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values.
+1. Scheme of kitchen alarm:
 
    ![kitchen_scheme](images/kitchen_scheme.png)
