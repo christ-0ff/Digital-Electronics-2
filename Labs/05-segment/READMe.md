@@ -32,9 +32,7 @@ ISR(TIMER1_OVF_vect)
     citac = 0;
     }
 }
-```
 
-```c
 /**********************************************************************
  * Function: Timer/Counter0 overflow interrupt
  * Purpose:  Display tens and units of a counter at SSD.
