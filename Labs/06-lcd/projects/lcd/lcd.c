@@ -193,7 +193,7 @@ static void lcd_write(uint8_t data, uint8_t rs)
         /* FRYZA: EXPERIMENTALLY ADDED FOR ARDUINO UNO
          * Delay MUST be greater than 679 us
          */
-        _delay_us(750);
+        _delay_us(800);
     }
 } /* lcd_write */
 
