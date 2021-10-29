@@ -81,9 +81,9 @@ int main(void)
     //lcd_putc('!');
     
     lcd_gotoxy(1,0);
-    lcd_puts("00:00.0   a");
-    lcd_gotoxy(1,1);
-    lcd_puts("b         c");
+    lcd_puts("00:00.0   ");
+    //lcd_gotoxy(1,1);
+    //lcd_puts("b         c");
 
     // Set pointer to beginning of CGRAM memory
     lcd_command(1 << LCD_CGRAM);
@@ -98,24 +98,24 @@ int main(void)
     lcd_command(1 << LCD_DDRAM);
               
     // Display first custom character
-    lcd_gotoxy(0,0);
-    lcd_puts(0);
-    lcd_gotoxy(1,0);
-    lcd_putc(1);
-    lcd_gotoxy(2,0);
-    lcd_putc(2);
-    lcd_gotoxy(3,0);
-    lcd_putc(3);
-    lcd_gotoxy(4,0);
-    lcd_putc(4);
-    
+    //lcd_gotoxy(0,0);
+    //lcd_puts(0);
+    //lcd_gotoxy(1,0);
+    //lcd_putc(1);
+    //lcd_gotoxy(2,0);
+    //lcd_putc(2);
+    //lcd_gotoxy(3,0);
+    //lcd_putc(3);
+    //lcd_gotoxy(4,0);
+    //lcd_putc(4);
+
     // Configure 8-bit Timer/Counter2 for Stopwatch
     // Set the overflow prescaler to 16 ms and enable interrupt
-//    TIM2_overflow_interrupt_enable();
-//    TIM2_overflow_16ms();
-//     
-//     TIM1_overflow_interrupt_enable();
-//     TIM1_overflow_262ms();
+    TIM2_overflow_interrupt_enable();
+    TIM2_overflow_16ms();
+     
+//    TIM1_overflow_interrupt_enable();
+//    TIM1_overflow_262ms();
        
 //    TIM0_overflow_interrupt_enable();
 //    TIM0_overflow_16ms();
@@ -178,15 +178,15 @@ ISR(TIMER2_OVF_vect)
         
         lcd_gotoxy(7,0);                      //TENS TO LCD
         lcd_putc(tens + '0');
+        
         itoa(secs, lcd_string, 10);
-    
         lcd_gotoxy(4,0);                      //SECS TO LCD
         if (secs < 10)lcd_putc('0');
         lcd_puts(lcd_string);
    
-        //lcd_gotoxy(2,0);                      //MINS TO LCD
-        //itoa(mins, lcd_string, 10);
-        //lcd_puts(lcd_string);
+        lcd_gotoxy(2,0);                      //MINS TO LCD
+        itoa(mins, lcd_string, 10);
+        lcd_puts(lcd_string);
             
     }
     // Else do nothing and exit the ISR
