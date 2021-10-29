@@ -8,7 +8,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 ### LCD display module
 
 1. Description of what ASCII table is.
-   * ASCII - ASCII table is an international table that gives every character, that is used mostly in informatics, it's number/value. For example letter `A` has number `65`. Or `%` character has number `37`.
+   * ASCII - ASCII table is an international table that gives every character, that is used mostly in informatics, it's number/value. For example letter `A` is connected to decimal number `65` and hexadecimal `41`. Or `%` character is represented by decimal number `37` and hexadecimal `25` .
 
 2. (Hand-drawn) picture of time signals between ATmega328P and LCD keypad shield (HD44780 driver) when transmitting three character data `De2`.
 
