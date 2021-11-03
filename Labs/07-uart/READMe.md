@@ -1,6 +1,6 @@
 # Lab 7: Kryštof Buroň
 
-Link to this file in my GitHub repository:
+Link to this file in GitHub repository:
 
 [https://github.com/christ-0ff/Digital-Electronics-2/tree/main/Labs/07-uart](https://github.com/christ-0ff/Digital-Electronics-2/tree/main/Labs/07-uart)
 
