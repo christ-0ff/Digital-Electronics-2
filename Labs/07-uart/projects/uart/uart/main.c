@@ -76,41 +76,34 @@ int main(void)
     // Will never reach this
     return 0;
     
-    uint8_t get_parity(uint8_t data, uint8_t type) //TYPE: 0 = no parity, 1 = odd, 2 = even
+    uint8_t get_parity(uint8_t data, uint8_t type) //TYPE: 1 = odd, 2 = even
     {
         int ones = 0;
         int i;
         
-        if (type == 0)
+        for(i=0; i<8; i++)
+        {
+            // If LSB is set then increment ones otherwise zeros
+            if (data & 1) ones++;
+            // Right shift bits of num to one position
+            data >>= 1;
+        }
+            
+        if ((ones % 2 == 0) & (type == 2)) // we got even number of ones & we want even number of ones
         {
             return 0;
         }
-        else
+        else if ((ones % 2 == 0) & (type == 1)) //we got even number of ones but we want odd number.
         {
-            for(i=0; i<8; i++)
-            {
-                // If LSB is set then increment ones otherwise zeros
-                if (data & 1) ones++;
-                // Right shift bits of num to one position
-                data >>= 1;
-            }
-            
-            if ((ones % 2 == 0) & (type == 2)) // we got even number of ones & we want even number of ones
-            {
-                return 0;
-            }
-            else if ((ones % 2 == 0) & (type == 1)) //we got even number of ones but we want odd number.
-            {
-                return 1;
-            }
-            else if ((ones % 2 == 1) & (type == 2)) // we got odd number of ones but we want even number of ones
-            {
-                return 1;
-            }
-            else if ((ones % 2 == 1) & (type == 1)) //we got odd number of ones & we want odd number.
-            {
-                return 0;
-            }
+            return 1;
+        }
+        else if ((ones % 2 == 1) & (type == 2)) // we got odd number of ones but we want even number of ones
+        {
+            return 1;
+        }
+        else if ((ones % 2 == 1) & (type == 1)) //we got odd number of ones & we want odd number.
+        {
+            return 0;
         }
         
     }
