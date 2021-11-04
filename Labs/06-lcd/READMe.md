@@ -1,6 +1,6 @@
 # Lab 6: Kryštof Buroň  
 
-Link to my `Digital-electronics-2` GitHub repository:
+Link to `Digital-electronics-2` GitHub repository:
 
 [https://github.com/christ-0ff/Digital-Electronics-2](https://github.com/christ-0ff/Digital-Electronics-2)
 
