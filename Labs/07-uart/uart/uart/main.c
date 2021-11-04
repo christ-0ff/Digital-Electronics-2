@@ -19,6 +19,9 @@
 #include "uart.h"           // Peter Fleury's UART library
 
 /* Function definitions ----------------------------------------------*/
+#ifndef F_CPU
+# define F_CPU 16000000  // CPU frequency in Hz required for UART_BAUD_SELECT
+#endif
 /**********************************************************************
  * Function: Main function where the program execution begins
  * Purpose:  Use Timer/Counter1 and start ADC conversion four times 
@@ -58,7 +61,7 @@ int main(void)
     TIM1_overflow_262ms();
     
     // Initialize UART to asynchronous, 8N1, 9600
-    
+    uart_init(UART_BAUD_SELECT(9600, F_CPU));
     
     // Enables interrupts by setting the global interrupt mask
     sei();
@@ -109,4 +112,11 @@ ISR(ADC_vect)
     lcd_puts("   ");
     lcd_gotoxy(13,0);
     lcd_puts(lcd_string_hex);
+    //UART
+    uart_puts("ADC Value: ");
+    uart_puts(lcd_string);
+    uart_puts(" bits  ");
+    //uart_putc('\n');
+    uart_putc('\r');
+    
 }
