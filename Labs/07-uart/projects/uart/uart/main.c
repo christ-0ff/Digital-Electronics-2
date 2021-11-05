@@ -76,40 +76,51 @@ int main(void)
     // Will never reach this
     return 0;
     
-    uint8_t get_parity(uint8_t data, uint8_t type) //TYPE: 1 = odd, 2 = even
+} // Konec Mainu
+
+uint8_t get_parity(uint8_t data, uint8_t type) //TYPE: 1 = odd, 0 = even
+{
+    int ones = 0;
+    
+    for(int i=0; i<8; i++)
     {
-        int ones = 0;
-        int i;
-        
-        for(i=0; i<8; i++)
-        {
-            // If LSB is set then increment ones otherwise zeros
-            if (data & 1) ones++;
-            // Right shift bits of num to one position
-            data >>= 1;
-        }
-            
-        if ((ones % 2 == 0) & (type == 2)) // we got even number of ones & we want even number of ones
-        {
-            return 0;
-        }
-        else if ((ones % 2 == 0) & (type == 1)) //we got even number of ones but we want odd number.
-        {
-            return 1;
-        }
-        else if ((ones % 2 == 1) & (type == 2)) // we got odd number of ones but we want even number of ones
-        {
-            return 1;
-        }
-        else if ((ones % 2 == 1) & (type == 1)) //we got odd number of ones & we want odd number.
-        {
-            return 0;
-        }
-        
+        // If LSB is one then increment ones
+        if (data & 1) ones++;
+        // Right shift bits of num to one position
+        data >>= 1;
     }
     
+    if (type >= 2)
+    {
+        return type;
+    }
+    else if (OnesEvenTypeEven(ones, type) || OnesOddTypeOdd(ones, type))
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+bool OnesOddTypeOdd(uint8_t int ones,uint8_t int type)
+{
+    return ((ones % 2 == 1) && (type == 1))
+}
+bool OnesEvenTypeEven(uint8_t int ones,uint8_t int type)
+{
+    return ((ones % 2 == 0) && (type == 0))
 }
 
+
+bool OnesEvenTypeOdd(uint8_t int ones,uint8_t int type)
+{
+    return ((ones % 2 == 0) && (type == 1))
+}
+bool OnesOddTypeEven(uint8_t int ones,uint8_t int type)
+{
+    return ((ones % 2 == 1) && (type == 0))
+}
 /* Interrupt service routines ----------------------------------------*/
 /**********************************************************************
  * Function: Timer/Counter1 overflow interrupt
