@@ -11,5 +11,5 @@
 
    | **Frame type** | **8** | **7** | **6** | **5** | **4** | **3** | **2** | **1** | **0** | **Description**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
    | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-- |
-   | Address | | | | | | | | R/W | ACK | |
-   | Data    | | | | | | | | | ACK | |
+   | Address | | | | | | | | R/W | ACK | All address packets consist of 9 bits. 7 bits are used for adress of slave device, 1 R/W bit is driver bit. And last 1 bit is Acknowledge bit from slave. |
+   | Data    | | | | | | | | | ACK | All data packets consist of 9 bits and are transferd via I2C bus. There is 1 byte of data, and 1 ancknowledge bit(ACK) from slave device. |
