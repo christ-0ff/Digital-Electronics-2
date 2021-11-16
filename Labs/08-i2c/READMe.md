@@ -96,7 +96,13 @@ ISR(TIMER1_OVF_vect)
 
 2. (Hand-drawn) picture of I2C signals when reading checksum (only 1 byte) from DHT12 sensor. Indicate which specific moments control the data line master and which slave.
 
-   ![your figure]()
+   ![your figure](images/i2c.png)
+
+Start & Stop done by master.
+Master sends slave address to slave as well as R/W condition. 
+All ACK/NACK is set by slave.
+Checksum data sends slave to master.
+
 
 ### Meteo station
 
