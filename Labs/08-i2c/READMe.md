@@ -101,7 +101,7 @@ ISR(TIMER1_OVF_vect)
 * Start & Stop done by master.
 * Master always sends slave address to slave as well as R/W condition. 
 * All ACK/NACK is set by slave.
-* Checksum data sends slave to master.
+* "Some Checksum Data" sends slave to master.
 
 
 ### Meteo station
