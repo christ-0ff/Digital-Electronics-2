@@ -57,7 +57,7 @@ void comp_data_read(void)
 	{
 		twi_write(0xE1);
 		twi_start((0x76<<1) + TWI_READ);
-		for(int i = 0; i < 8; i++)
+		for(int i = 0; i < 7; i++)
 		{
 			comp_data[i] = twi_read_ack();
 		}
@@ -66,7 +66,7 @@ void comp_data_read(void)
 		dig_H2 = ((short)comp_data[1] << 8) | ((short)comp_data[0]);                //E2,E1  data0 = E1, data1 = E2
 		dig_H3 = (unsigned char)comp_data[2];                                       //E3     data2 = E3
 		dig_H4 = (short)comp_data[4];                                               //E5,E4  data3 = E4, data4 = E5
-		dig_H4 = ((short)comp_data[5] << 4);
+		dig_H4 = ((short)comp_data[3] << 4);
 		dig_H5 = ((short)comp_data[4] >> 4) | ((short)comp_data[5] << 4);           //E6,E5  data4 = E5, data5 = E6
 		dig_H6 = comp_data[6];												    	 //E7     data6 = E7
 	}                                               

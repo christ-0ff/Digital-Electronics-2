@@ -141,7 +141,7 @@ int main(void)
     {
         twi_write(0xE1);
         twi_start((0x76<<1) + TWI_READ);
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 7; i++)
         {
             comp_data[i] = twi_read_ack();
         }
@@ -151,7 +151,7 @@ int main(void)
     dig_H2 = ((short)comp_data[1] << 8) | ((short)comp_data[0]);                //E2,E1  data0 = E1, data1 = E2
     dig_H3 = (unsigned char)comp_data[2];                                       //E3     data2 = E3
     dig_H4 = (short)comp_data[4];                                               //E5,E4  data3 = E4, data4 = E5
-    dig_H4 = ((short)comp_data[5] << 4);
+    dig_H4 = ((short)comp_data[3] << 4);
     dig_H5 = ((short)comp_data[4] >> 4) | ((short)comp_data[5] << 4);           //E6,E5  data4 = E5, data5 = E6
     dig_H6 = comp_data[6];                                                      //E7     data6 = E7
     
@@ -287,7 +287,7 @@ int32_t comp_temp(int32_t temp)
     
     var1 = ((((temp>>3) - ((int32_t)dig_T1<<1))) * ((int32_t)dig_T2)) >> 11;
     var2 = (((((temp>>4) - ((int32_t)dig_T1)) * ((temp>>4) - ((int32_t)dig_T1)))
-    >> 12) * ((int32_t)dig_T3)) >> 14;
+           >> 12) * ((int32_t)dig_T3)) >> 14;
     t_fine = var1 + var2;
     T = (t_fine * 5 + 128) >> 8;
     return T;
@@ -308,7 +308,7 @@ uint32_t comp_press(int32_t press)
     var1 = (((((int64_t)1)<<47)+var1))*((int64_t)dig_P1)>>33;
     if (var1 == 0)
     {
-        return 0;
+        return 0;   // avoid exception caused by division by zero
     }
     p = 1048576 - press;
     p = (((p<<31)-var2)*3125)/var1;
