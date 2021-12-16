@@ -56,8 +56,8 @@ Vytvoření meteostanice pro měření teploty a tlaku s natáčecím solárním
 
 ## Hlavní aplikace
 
-
-### Ovládání servo motoru fotorezistorem
+### 1. Ovládání servo motoru
+#### Ovládání servo motoru fotorezistorem
 
 Servo je řízeno pomocí PWM. Je třeba si definovat periodu cyklů a jeho WGM (Waveform Generation Mode). Na následujícím obrázku je znázorněno ovládání serva pomocí PWM.
 
@@ -83,7 +83,7 @@ Abychom dokázali číst hodnotu napětí z fotorezistoru musí být dodrženy t
 Když je hodnota napětí na výstupu děliče napětí rovna vstupnímu napětí 5V, tehdy je hodnota ADC maximální a opačně při vystupnímu napětí přibližně 0V je ADC hodnota také 0. Vypočtené hodnoty ADC pro různá výstupní napětí jsou znázorněny v tabulce níže.
 Rp znázorňuje hodnotu odporu fotorezistoru, hodnota opdoru Rp při normálním osvětlení je Rp = 140kΩ.
 
-#### Tabulka ADC hodnot pro vybraná výstupní napětí.
+##### Tabulka ADC hodnot pro vybraná výstupní napětí.
 
 | **Rp** | **U2** | **ADC** |
 | :-: | :-: | :-- | 
@@ -96,7 +96,7 @@ Rp znázorňuje hodnotu odporu fotorezistoru, hodnota opdoru Rp při normálním
 | >1,21MΩ | 0 | 0 |
 
 
-### Ovládání servo motoru pomocí joysticku
+#### Ovládání servo motoru pomocí joysticku
 
 Princip ovládání servomotorů zůstává stejný, ale namísto jednoho proměnlivého rezistoru se budou tentokrát používat 2 proměnlivé rezistory (2 potenciometry).
 
@@ -104,9 +104,12 @@ Princip ovládání servomotorů zůstává stejný, ale namísto jednoho promě
 
 Aby Arduino dokázalo s těmito analogovými hodnotami pracovat, je třeba provést A/D převod podobně jako u fotorezistoru.
 
-#### Vývojový diagram serva s fotorezistorem a joystickem
+##### Vývojový diagram serva s fotorezistorem a joystickem
 
    ![Flowchart_SPJ](images/Flowchart_SPJ.jpg)
+
+### 2. Čtení hodnot ze senzoru BME 280
+### 3. Ovládání LCD displaye
 
 <a name="video"></a>
 
