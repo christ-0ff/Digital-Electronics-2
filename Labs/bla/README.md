@@ -1,5 +1,8 @@
 Čtení hodnot ze senzoru BME 280 je uskutečněno pomocí I2C(TWI) komunikace. Pomocí I2C čteme hodnoty z paměťových registrů -- určených pro uložení naměřenýh dat -- daných datasheetem, které následně musíme přepočítat pomocí funkcí, a pomocí kompenzačních dat uložených v senzoru na správná data určující teplotu, tlak a vlhkost.
 
+*Připojení senzoru BME 280 k Arduino UNO*
+[scheme](images/scheme.png)
+
 #### Čtení a kombinování kompenzačních hodnot
 Čtení kompenzačních hodnot je uskutečněno pomocí I2C komunikace za pomocí `twi` knihovny od pana Tomáše Frýzy, Petera Fleuryho. Čtení dat je provedeno jednorázovým čtením všech hodnot. Vzhledem k tomu, že paměť kompenzačních dat je rozdělena na dvě části, tak i čtení dat musí proběhnout dvakrat i přes to, že všechna data čteme jednorázově.
 První čtení je uskutečněno na paměťových adresách `0x88` až `0xA1`. Druhé čtení začíná na adrese `0xE1` a končí na adrese `0xE7`. 
@@ -61,6 +64,8 @@ Jednotlivá data jsou uložena na adresách v paměti od adresy `0xF7` do adresy
 | press_lsb | 0xF8 | press_lsb[7:0] |
 | press_msb | 0xF7 | press_msb[7:0] |
 
-Data vyčtená z tabulky musíme následně spojit do datasheetem určených datových typů. Pro vlhkost je to
+Data vyčtená z tabulky musíme následně spojit do datasheetem určených datových typů. Pro vlhkost je to neznaménkový 16 bitový formát uložený v znaménkovém 32 bitovém formátu. Pro teplotu i tlak je to 20 bitový formát uložený ve znaménkovém 32 bitovém formátu. Takto spojená data můžeme následně přepočítat do správných změřených hodnot.
 
 #### Přepočet dat
+Přepočet dat je uskutečněn pomocí kompenzačních dat stažených z registrů senzoru a z naměřených dat. Všechna tato data jsou vložena do funkcí definovaných výrobcem, které jsou obsažené v datasheetě.
+
