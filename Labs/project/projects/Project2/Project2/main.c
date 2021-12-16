@@ -62,7 +62,7 @@
     short dig_P8;
     short dig_P9;
     
-    unsigned char dig_H1 = 0x4B;
+    unsigned char dig_H1;
     short dig_H2;
     unsigned char dig_H3;
     short dig_H4;
@@ -97,7 +97,7 @@ int main(void)
     sei();
     
     
-    // Data compensation readout
+    // Compensation data readout
     result = twi_start((0x76<<1) + TWI_WRITE);
             
     //Result
@@ -112,35 +112,11 @@ int main(void)
         
         twi_write(0x88);
         twi_start((0x76<<1) + TWI_READ);
-       /* for(int i = 0; i <= 24; i++)
+        for(int i = 0; i <= 24; i++)
         {
             comp_data[i] = twi_read_ack();
-        }*/
-        comp_data[0] = twi_read_ack();
-        comp_data[1] = twi_read_ack();
-        comp_data[2] = twi_read_ack();
-        comp_data[3] = twi_read_ack();
-        comp_data[4] = twi_read_ack();
-        comp_data[5] = twi_read_ack();
-        comp_data[6] = twi_read_ack();
-        comp_data[7] = twi_read_ack();
-        comp_data[8] = twi_read_ack();
-        comp_data[9] = twi_read_ack();
-        comp_data[10] = twi_read_ack();
-        comp_data[11] = twi_read_ack();
-        comp_data[12] = twi_read_ack();
-        comp_data[13] = twi_read_ack();
-        comp_data[14] = twi_read_ack();
-        comp_data[15] = twi_read_ack();
-        comp_data[16] = twi_read_ack();
-        comp_data[17] = twi_read_ack();
-        comp_data[18] = twi_read_ack();
-        comp_data[19] = twi_read_ack();
-        comp_data[20] = twi_read_ack();
-        comp_data[21] = twi_read_ack();
-        comp_data[22] = twi_read_ack();
-        comp_data[23] = twi_read_ack();
-        comp_data[24] = twi_read_nack();
+        }
+            comp_data[24] = twi_read_nack();
         twi_stop();
         
     dig_T1 = ((unsigned short)comp_data[1] << 8) | ((unsigned short)comp_data[0]); //89,88
@@ -175,18 +151,11 @@ int main(void)
         uint8_t comp_data[7];
         twi_write(0xE1);
         twi_start((0x76<<1) + TWI_READ);
-        comp_data[0] = twi_read_ack();
-        comp_data[1] = twi_read_ack();
-        comp_data[2] = twi_read_ack();
-        comp_data[3] = twi_read_ack();
-        comp_data[4] = twi_read_ack();
-        comp_data[5] = twi_read_ack();
-        comp_data[6] = twi_read_nack();
-        /*for(int i = 0; i <= 5; i++)
+        for(int i = 0; i <= 5; i++)
         {
             comp_data[i] = twi_read_ack();
         }
-            comp_data[6] = twi_read_nack();*/
+            comp_data[6] = twi_read_nack();
         twi_stop();
     
     dig_H2 = ((short)comp_data[1] << 8) | ((short)comp_data[0]);                //E2,E1  data0 = E1, data1 = E2
