@@ -23,13 +23,13 @@ Odkaz na GitHub repozítář:
 
 ## Cíle projektu
 
-Vytvoření meteostanice pro měření teploty a tlaku s natáčecím solárním panelem, a se zobrazováním hodnot na display.
+Vytvoření meteostanice pro měření teploty, tlaku a vlhkosti s natáčecím solárním panelem, a se zobrazováním hodnot na display.
 
 <a name="hardware"></a>
 
 ## Popis hardwaru
 
-* Měřící sensor BME 280, který měří teplotu a tlak.
+* Měřící sensor BME 280, který měří teplotu, tlak a vlhkost.
 * LCD display - Zobrazení výsledných hodnot.
 * Servomotor - Natáčení solárního panelu.
 * Joystick - Manuální řízení servomotorů.
