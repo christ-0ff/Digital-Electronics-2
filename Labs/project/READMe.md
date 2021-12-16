@@ -39,13 +39,13 @@ Vytvoření meteostanice pro měření teploty a tlaku s natáčecím solárním
 
 ## Popis knihoven
 
-###Vlastní knihovny
+### Vlastní knihovny
 * GPIO - Knihovna s funkcemi pro kontrolu AVR pinů.
 * Timer - Knihovna pro nastavení ISR časovačů.
 * I2C(TWI) - Knihovna pro I2C(TWI) komunikaci mezi senzory.
 * LCD - Základní knihovna pro ovládání LCD displaye.
 
-###Systémové knihovny
+### Systémové knihovny
 * <avr/io.h> - Knihovna pro definování vstupních a výstupních pinů.
 * <avr/interrupt.h> - C knihovna pro AVR-GCC definující přerušení.
 * <stdlib.h> - C knihovna pro převod funkcí.
