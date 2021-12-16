@@ -115,7 +115,7 @@ Aby Arduino dokázalo s těmito analogovými hodnotami pracovat, je třeba prov�
    ![Flowchart_SPJ](images/Flowchart_SPJ.jpg)
 
 ### 2. Čtení hodnot ze senzoru BME 280
-Čtení hodnot ze senzoru BME 280 je uskutečněno pomocí I2C(TWI) komunikace. Pomocí I2C čteme hodnoty z paměťových registrů -- určených pro uložení naměřenýh dat -- daných datasheetem, které následně musíme přepočítat pomocí funkcí, a pomocí kompenzačních dat uložených v senzoru na správná data určující teplotu, tlak a vlhkost.
+Čtení hodnot ze senzoru BME 280 je uskutečněno pomocí I2C(TWI) komunikace. Pomocí I2C čteme hodnoty z paměťových registrů – určených pro uložení naměřenýh dat – daných datasheetem, které následně musíme přepočítat pomocí funkcí, a pomocí kompenzačních dat uložených v senzoru na správná data určující teplotu, tlak a vlhkost.
 
 *Připojení senzoru BME 280 k Arduino UNO*
 ![scheme](images/scheme.png)
@@ -198,7 +198,7 @@ Stavový automat s jednotlivými stavy vypadá následovně:
 
 ![FSM](images/FSM.png)
 
-Automat funguje uvnitř ISR (interrupt service routine), která je vyvolána periodicky pomocí časovače (TIMER2), a to každých 128 us. Uvnitř této funkce se pkaždé zkontroluje, jestli bylo zmáčknuto tlačítko (popřípadě puštěno), a podle toho se vyvolá odpovídající událost - stavový automat se přesune do nového stavu. V každém z těchto stavů požádá program o data ze senzoru, a ty následně vypíše na LCD display. K této funkci byla použita knihovna "timer.h", vytvořena v jednom z našich cvičení v předmětu DE2.
+Automat funguje uvnitř ISR (interrupt service routine), která je vyvolána periodicky pomocí časovače (TIMER2), a to každých 128 us. Uvnitř této funkce se pokaždé zkontroluje, jestli bylo zmáčknuto tlačítko (popřípadě puštěno), a podle toho se vyvolá odpovídající událost - stavový automat se přesune do nového stavu. V každém z těchto stavů požádá program o data ze senzoru, a ty následně vypíše na LCD display. K této funkci byla použita knihovna "timer.h", vytvořena v jednom z našich cvičení v předmětu DE2.
 
 
 <a name="video"></a>
