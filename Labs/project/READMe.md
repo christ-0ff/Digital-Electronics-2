@@ -72,7 +72,7 @@ Stanovíme hodnotu rezistoru pro dělič napětí R1 = 100kΩ
 
 Přibližné stanovení hodnot je znázorněno na obrázku níže.
 
-   ![PVS](PVS.jpg)
+   ![PVS](images/PVS.jpg)
 
 Abychom dokázali číst hodnotu napětí z fotorezistoru musí být dodrženy tyto kroky:
 
