@@ -56,6 +56,7 @@ Vytvoření meteostanice pro měření teploty a tlaku s natáčecím solárním
 
 ## Hlavní aplikace
 
+*Schéma celého zapojení*
    ![main](images/main_scheme.png)
 
 ### 1. Ovládání servo motoru
