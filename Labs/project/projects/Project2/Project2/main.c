@@ -63,7 +63,7 @@
     short dig_P8;
     short dig_P9;
     
-    unsigned char dig_H1;
+    unsigned char dig_H1 = 0x4B;
     short dig_H2;
     unsigned char dig_H3;
     short dig_H4;
@@ -109,11 +109,11 @@ int main(void)
     
     if (!result)
     {
-        uint8_t comp_data[25];
+        uint8_t comp_data[24];
         
         twi_write(0x88);
         twi_start((0x76<<1) + TWI_READ);
-        for(int i = 0; i <= 23; i++)
+        for(int i = 0; i <= 24; i++)
         {
             comp_data[i] = twi_read_ack();
         }
@@ -134,11 +134,11 @@ int main(void)
     dig_P8 = ((short)comp_data[21] << 8) | ((short)comp_data[20]);                 //9D,9C
     dig_P9 = ((short)comp_data[23] << 8) | ((short)comp_data[22]);                 //9F,9E
     
-    dig_H1 = (unsigned char)comp_data[24];                                         //A1
+    //dig_H1 = (unsigned char)comp_data[24];                                         //A1
     }  
 
                         
-                 
+              
     result = twi_start((0x76<<1) + TWI_WRITE);
     
     //Result
@@ -149,24 +149,24 @@ int main(void)
     
     if (!result)
     {
-        uint8_t comp_data1[7];
+        uint8_t comp_data[7];
         twi_write(0xE1);
         twi_start((0x76<<1) + TWI_READ);
         for(int i = 0; i <= 5; i++)
         {
-            comp_data1[i] = twi_read_ack();
+            comp_data[i] = twi_read_ack();
         }
-            comp_data1[6] = twi_read_nack();
+            comp_data[6] = twi_read_nack();
         twi_stop();
     
-    dig_H2 = ((short)comp_data1[1] << 8) | ((short)comp_data1[0]);                //E2,E1  data0 = E1, data1 = E2
-    dig_H3 = (unsigned char)comp_data1[2];                                       //E3     data2 = E3
-    dig_H4 = (short)comp_data1[4];                                               //E5,E4  data3 = E4, data4 = E5
-    dig_H4 = ((short)comp_data1[3] << 4);
-    dig_H5 = ((short)comp_data1[4] >> 4) | ((short)comp_data1[5] << 4);           //E6,E5  data4 = E5, data5 = E6
-    dig_H6 = comp_data1[6];                                                       //E7     data6 = E7                 
+    dig_H2 = ((short)comp_data[1] << 8) | ((short)comp_data[0]);                //E2,E1  data0 = E1, data1 = E2
+    dig_H3 = (unsigned char)comp_data[2];                                       //E3     data2 = E3
+    dig_H4 = (short)comp_data[4];                                               //E5,E4  data3 = E4, data4 = E5
+    dig_H4 = ((short)comp_data[3] << 4);
+    dig_H5 = ((short)comp_data[4] >> 4) | ((short)comp_data[5] << 4);           //E6,E5  data4 = E5, data5 = E6
+    dig_H6 = comp_data[6];                                                      //E7     data6 = E7                                                                      
     }
-
+       
     // Sensor INIT
     result = twi_start((0x76<<1) + TWI_WRITE);
     
@@ -253,17 +253,6 @@ ISR(TIMER1_OVF_vect)
             press = (int32_t)upress;
             temp = (int32_t)utemp;
             hum = (int32_t)uhum;
-            /*         
-            ltoa(upress, uart_string, 16);
-            uart_puts(uart_string);
-            uart_puts("\r\n");
-            ltoa(utemp, uart_string, 16);
-            uart_puts(uart_string);
-            uart_puts("\r\n");
-            ltoa(uhum, uart_string, 16);
-            uart_puts(uart_string);
-            uart_puts("\r\n");*/
-      
         }
     }
 }
