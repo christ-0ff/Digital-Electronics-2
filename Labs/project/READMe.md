@@ -57,7 +57,7 @@ Vytvoření meteostanice pro měření teploty, tlaku a vlhkosti s natáčecím 
 ## Hlavní aplikace
 
 *Schéma celého zapojení*
-   ![main](images/main_scheme.png)
+   ![main](images/main.png)
    
 *Reálné zapojení*
    ![main](images/real.png)
