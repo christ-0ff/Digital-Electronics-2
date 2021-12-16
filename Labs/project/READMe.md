@@ -100,7 +100,7 @@ Rp znázorňuje hodnotu odporu fotorezistoru, hodnota opdoru Rp při normálním
 
 Princip ovládání servomotorů zůstává stejný, ale namísto jednoho proměnlivého rezistoru se budou tentokrát používat 2 proměnlivé rezistory (2 potenciometry).
 
-   ![joystick_sim](images/joystick_sim.png)
+   ![joystick_sim](images/joystick.png)
 
 Aby Arduino dokázalo s těmito analogovými hodnotami pracovat, je třeba provést A/D převod podobně jako u fotorezistoru.
 
