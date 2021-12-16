@@ -61,7 +61,7 @@ Vytvoření meteostanice pro měření teploty a tlaku s natáčecím solárním
 
 Servo je řízeno pomocí PWM. Je třeba si definovat periodu cyklů a jeho WGM (Waveform Generation Mode). Na následujícím obrázku je znázorněno ovládání serva pomocí PWM.
 
-   ![WGM]()
+   ![WGM](images/WGM.jpg)
 
 Jelikož 320,000.0 cyklů za 1 sekundu je pro ICR1 příliš mnoho, rozhodli jsme se to zkrátit na 1/16. Takže za dobu 20ms, což je doba Serva 9g (50Hz) se za 1 sekundu děje 30 PWM cyklů při zvoleném ICR1.
 Servo se nastaví do neinvertujícího módu, takže bude počítat směrem z dolů nahoru. V invertujícím módu by za stejnou dobu například 2ms počítalo směrem shora dolů a duty cyckle serva by byl mnohem vyšší.
@@ -72,7 +72,7 @@ Stanovíme hodnotu rezistoru pro dělič napětí R1 = 100kΩ
 
 Přibližné stanovení hodnot je znázorněno na obrázku níže.
 
-   ![PVS]()
+   ![PVS](PVS.jpg)
 
 Abychom dokázali číst hodnotu napětí z fotorezistoru musí být dodrženy tyto kroky:
 
@@ -100,13 +100,13 @@ Rp znázorňuje hodnotu odporu fotorezistoru, hodnota opdoru Rp při normálním
 
 Princip ovládání servomotorů zůstává stejný, ale namísto jednoho proměnlivého rezistoru se budou tentokrát používat 2 proměnlivé rezistory (2 potenciometry).
 
-   ![joystick_sim]()
+   ![joystick_sim](images/joystick_sim.PNG)
 
 Aby Arduino dokázalo s těmito analogovými hodnotami pracovat, je třeba provést A/D převod podobně jako u fotorezistoru.
 
 #### Vývojový diagram serva s fotorezistorem a joystickem
 
-   ![Flowchart_SPJ]()
+   ![Flowchart_SPJ](images/Flowchart_SPJ.jpg)
 
 <a name="video"></a>
 
