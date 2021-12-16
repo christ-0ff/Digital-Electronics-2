@@ -22,7 +22,7 @@ Vzhledem k tomu, že všechna kompenzační data jsou uložena v 8 bitových slo
 | 0x9C/0x9D | dig_P8 [7:0]/[15:8] | signed short |
 | 0x9E/0x9F | dig_P9 [7:0]/[15:8] | signed short |
 | 0xA1 | dig_H1 [7:0] | unsigned char |
-
+|
 | 0xE1/0xE2 | dig_H2 [7:0]/[15:8] | signed short |
 | 0xE3 | dig_H3 [7:0] | unsigned char |
 | 0xE4/0xE5[3:0] | dig_H4 [11:4]/[3:0] | signed short |
