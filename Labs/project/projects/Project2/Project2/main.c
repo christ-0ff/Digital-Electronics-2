@@ -43,10 +43,10 @@
     uint32_t c_press;
     uint32_t c_hum;
     
-    float press1;
     uint32_t press_frac = 256.00;
     uint32_t hum_frac = 1024.00;    
-    
+    uint32_t temp_frac = 1000;
+
     // Compensation parameters
     unsigned short dig_T1;
     short dig_T2;
@@ -97,15 +97,8 @@ int main(void)
     sei();
     
     
-    // Compensation data readout
+    /* COMPENSATION DATA READOUT */
     result = twi_start((0x76<<1) + TWI_WRITE);
-            
-    //Result
-    itoa(result, uart_string, 10);
-    uart_puts("readout ");
-    uart_puts(uart_string);
-    uart_puts("\r\n");
-    
     if (!result)
     {
         uint8_t comp_data[24];
@@ -133,22 +126,14 @@ int main(void)
     dig_P8 = ((short)comp_data[21] << 8) | ((short)comp_data[20]);                 //9D,9C
     dig_P9 = ((short)comp_data[23] << 8) | ((short)comp_data[22]);                 //9F,9E
     
-    //dig_H1 = (unsigned char)comp_data[24];                                         //A1
+    dig_H1 = (unsigned char)comp_data[24];                                         //A1
     }  
 
-                        
-              
     result = twi_start((0x76<<1) + TWI_WRITE);
-    
-    //Result
-    itoa(result, uart_string, 10);
-    uart_puts("readout2 ");
-    uart_puts(uart_string);
-    uart_puts("\r\n");
-    
     if (!result)
     {
         uint8_t comp_data[7];
+        
         twi_write(0xE1);
         twi_start((0x76<<1) + TWI_READ);
         for(int i = 0; i <= 5; i++)
@@ -158,24 +143,16 @@ int main(void)
             comp_data[6] = twi_read_nack();
         twi_stop();
     
-    dig_H2 = ((short)comp_data[1] << 8) | ((short)comp_data[0]);                //E2,E1  data0 = E1, data1 = E2
-    dig_H3 = (unsigned char)comp_data[2];                                       //E3     data2 = E3
-    dig_H4 = (short)comp_data[4];                                               //E5,E4  data3 = E4, data4 = E5
+    dig_H2 = ((short)comp_data[1] << 8) | ((short)comp_data[0]);
+    dig_H3 = (unsigned char)comp_data[2];
+    dig_H4 = (short)comp_data[4];
     dig_H4 = ((short)comp_data[3] << 4);
-    dig_H5 = ((short)comp_data[4] >> 4) | ((short)comp_data[5] << 4);           //E6,E5  data4 = E5, data5 = E6
-    dig_H6 = comp_data[6];                                                      //E7     data6 = E7                                                                      
+    dig_H5 = ((short)comp_data[4] >> 4) | ((short)comp_data[5] << 4);
+    dig_H6 = comp_data[6];
     }
        
-    // Sensor INIT
+    /* SENSOR INIT */
     result = twi_start((0x76<<1) + TWI_WRITE);
-    
-    //Result
-    //uart_puts("\f");
-    itoa(result, uart_string, 10);
-    uart_puts("init result ");
-    uart_puts(uart_string);
-    uart_puts("\r\n");
-    
     if (!result)
     {
         twi_write(0xF5);        //CONFIG
@@ -219,30 +196,14 @@ ISR(TIMER1_OVF_vect)
         
         //1--Read TempPressHum
         result = twi_start((0x76<<1) + TWI_WRITE);
-                    
-        //Result
-        itoa(result, uart_string, 10);
-        uart_puts("data read: ");
-        uart_puts(uart_string);
-        uart_puts("\r\n");
-        
         if (!result)
         {
             twi_write(0xF7);
-            
             twi_start((0x76<<1) + TWI_READ);
             for(int i = 0; i < 8; i++)
             {
                 data[i] = twi_read_ack();
             }
-            //data[0] = twi_read_ack(); //press msb
-            //data[1] = twi_read_ack(); //press lsb
-            //data[2] = twi_read_ack(); //press xlsb
-            //data[3] = twi_read_ack(); //temp msb
-            //data[4] = twi_read_ack(); //temp lsb
-            //data[5] = twi_read_ack(); //temp xlsb
-            //data[6] = twi_read_ack(); //hum msb
-            //data[7] = twi_read_ack(); //hum lsb
             twi_stop();
                   
             upress = ((uint32_t)data[0] << 12) | ((uint32_t)data[1] << 4) | ((uint32_t)data[2] >> 4);
@@ -267,26 +228,12 @@ ISR(TIMER0_OVF_vect)
         {
             i = 0;
             uart_puts("\f");
-            /*
-            c_temp = comp_temp(temp);
-            ltoa(c_temp, uart_string, 10);
-            uart_puts("temp: ");
-            uart_puts(uart_string);
-            uart_puts("\r\n");
+            
+            c_temp = comp_temp(temp)/temp_frac;
             
             c_press = comp_press(press)/press_frac;
-            //press1 = (float)c_press;
-            //press1 = press1/press_frac;
-            ltoa(c_press, uart_string, 10);
-            uart_puts("press: ");
-            uart_puts(uart_string);
-            uart_puts("\r\n");*/
            
             c_hum = comp_hum(hum)/hum_frac;
-            ltoa(c_hum, uart_string, 10);
-            uart_puts("hum: ");
-            uart_puts(uart_string);
-            uart_puts("\r\n");
             
         }
 }
