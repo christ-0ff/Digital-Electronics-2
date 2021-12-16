@@ -184,7 +184,7 @@ Přepočet dat je uskutečněn pomocí kompenzačních dat stažených z registr
 Pro vypisování potřebných dat na LCD display bylo využito knihovny "lcd.h", která umožňuje snadné nastavení pinů pro správnou funkci displaye. Pro inicializaci a zapnutí displaye se využije funkce "lcd_init()". Knihovna dále obsahuje důležitou funkci "lcd_puts()", která jako svůj parametr přijme řetězec znaků ve formě string a vypíše je na display. Pro nastavení polohy okud se mají znaky začít vypisovat slouží funkce "lcd_gotoxy()", která jako své parametry požduje x a y souřadnice na displayi.
 Na následujícím obrázku lze vidět schéma připojení displaye na desku Arduino UNO.
 
-![LCD_SCHEME](images/LCD_SCHEME.png)
+![LCD_SCHEME](images/LCD_SCHEME1.png)
 
 ### 4. Kostra aplikace
 Hlavní součástí kódu aplikace je stavový automat, který mění stavy po zmáčknutí tlačítka a podle toho zobrazuje data.
