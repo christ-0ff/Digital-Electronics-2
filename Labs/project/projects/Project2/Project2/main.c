@@ -23,7 +23,6 @@
 #include <stdlib.h>         // C library. Needed for conversion function
 #include "uart.h"           // Peter Fleury's UART library
 #include "twi.h"            // TWI library for AVR-GCC
-#include <util/delay.h>
 
 /* Functions ---------------------------------------------------------*/
     int32_t comp_temp(int32_t temp);
@@ -113,11 +112,35 @@ int main(void)
         
         twi_write(0x88);
         twi_start((0x76<<1) + TWI_READ);
-        for(int i = 0; i <= 24; i++)
+       /* for(int i = 0; i <= 24; i++)
         {
             comp_data[i] = twi_read_ack();
-        }
-            comp_data[24] = twi_read_nack();
+        }*/
+        comp_data[0] = twi_read_ack();
+        comp_data[1] = twi_read_ack();
+        comp_data[2] = twi_read_ack();
+        comp_data[3] = twi_read_ack();
+        comp_data[4] = twi_read_ack();
+        comp_data[5] = twi_read_ack();
+        comp_data[6] = twi_read_ack();
+        comp_data[7] = twi_read_ack();
+        comp_data[8] = twi_read_ack();
+        comp_data[9] = twi_read_ack();
+        comp_data[10] = twi_read_ack();
+        comp_data[11] = twi_read_ack();
+        comp_data[12] = twi_read_ack();
+        comp_data[13] = twi_read_ack();
+        comp_data[14] = twi_read_ack();
+        comp_data[15] = twi_read_ack();
+        comp_data[16] = twi_read_ack();
+        comp_data[17] = twi_read_ack();
+        comp_data[18] = twi_read_ack();
+        comp_data[19] = twi_read_ack();
+        comp_data[20] = twi_read_ack();
+        comp_data[21] = twi_read_ack();
+        comp_data[22] = twi_read_ack();
+        comp_data[23] = twi_read_ack();
+        comp_data[24] = twi_read_nack();
         twi_stop();
         
     dig_T1 = ((unsigned short)comp_data[1] << 8) | ((unsigned short)comp_data[0]); //89,88
@@ -152,11 +175,18 @@ int main(void)
         uint8_t comp_data[7];
         twi_write(0xE1);
         twi_start((0x76<<1) + TWI_READ);
-        for(int i = 0; i <= 5; i++)
+        comp_data[0] = twi_read_ack();
+        comp_data[1] = twi_read_ack();
+        comp_data[2] = twi_read_ack();
+        comp_data[3] = twi_read_ack();
+        comp_data[4] = twi_read_ack();
+        comp_data[5] = twi_read_ack();
+        comp_data[6] = twi_read_nack();
+        /*for(int i = 0; i <= 5; i++)
         {
             comp_data[i] = twi_read_ack();
         }
-            comp_data[6] = twi_read_nack();
+            comp_data[6] = twi_read_nack();*/
         twi_stop();
     
     dig_H2 = ((short)comp_data[1] << 8) | ((short)comp_data[0]);                //E2,E1  data0 = E1, data1 = E2
@@ -268,13 +298,13 @@ ISR(TIMER0_OVF_vect)
         {
             i = 0;
             uart_puts("\f");
-            
+            /*
             c_temp = comp_temp(temp);
             ltoa(c_temp, uart_string, 10);
             uart_puts("temp: ");
             uart_puts(uart_string);
             uart_puts("\r\n");
-            /*
+            
             c_press = comp_press(press)/press_frac;
             //press1 = (float)c_press;
             //press1 = press1/press_frac;
