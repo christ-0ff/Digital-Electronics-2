@@ -30,10 +30,10 @@ Vytvoření meteostanice pro měření teploty a tlaku s natáčecím solárním
 ## Popis hardwaru
 
 * Měřící sensor BME 280, který měří teplotu a tlak.
-* LCD display - Zobrazení výsledných hodnot
-* Servomotor - Natáčení solárního panelu
-* Joystick - Manuální řízení servomotorů
-* Fotorezistor - Snímání intenzity světla
+* LCD display - Zobrazení výsledných hodnot.
+* Servomotor - Natáčení solárního panelu.
+* Joystick - Manuální řízení servomotorů.
+* Fotorezistor - Snímání intenzity světla.
 
 <a name="libs"></a>
 
@@ -121,4 +121,5 @@ Write your text here
 
 ## References
 
-1. Write your text here.
+* [BME 280 - Datasheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf)
+* [Video k servomotoru]()
