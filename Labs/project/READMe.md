@@ -205,7 +205,8 @@ Automat funguje uvnitř ISR (interrupt service routine), která je vyvolána per
 
 ## Video
 
-Write your text here
+*Popisné video k meteostanici*
+[https://drive.google.com/file/d/1v1r6GMJ4YZtC85utdNBPvcGadkveGhrX/view?usp=sharing](https://drive.google.com/file/d/1v1r6GMJ4YZtC85utdNBPvcGadkveGhrX/view?usp=sharing)
 
 <a name="references"></a>
 
