@@ -112,7 +112,7 @@ Aby Arduino dokázalo s těmito analogovými hodnotami pracovat, je třeba prov�
 Čtení hodnot ze senzoru BME 280 je uskutečněno pomocí I2C(TWI) komunikace. Pomocí I2C čteme hodnoty z paměťových registrů -- určených pro uložení naměřenýh dat -- daných datasheetem, které následně musíme přepočítat pomocí funkcí, a pomocí kompenzačních dat uložených v senzoru na správná data určující teplotu, tlak a vlhkost.
 
 *Připojení senzoru BME 280 k Arduino UNO*
-[scheme](images/scheme.png)
+![scheme](images/scheme.png)
 
 #### Čtení a kombinování kompenzačních hodnot
 Čtení kompenzačních hodnot je uskutečněno pomocí I2C komunikace za pomocí `twi` knihovny od pana Tomáše Frýzy, Petera Fleuryho. Čtení dat je provedeno jednorázovým čtením všech hodnot. Vzhledem k tomu, že paměť kompenzačních dat je rozdělena na dvě části, tak i čtení dat musí proběhnout dvakrat i přes to, že všechna data čteme jednorázově.
@@ -151,7 +151,7 @@ Funkce jednotlivých módů:
 * `Normal mode` - `Normal mode` je mód, kdy je prováděno opakované automatické meření. Senzor se v tomhle módu přepíná ze stavu `Sleep mode` do stavu `Normal mode`, kde senzor naměří hodnoty, a následně se přepně do stavu `Sleep mode`. Můžeme také nastavit jak často se budou jednotlivá měření opakovat. Jednotlivá nastavení se pohybují od 0,5 do 1000 ms.
 
 *Obrázek stavového diagramu ukazuje přechod mezi jednotlivými módy*
-[stavovy_diagram](images/stavovy_diagram.png)
+![stavovy_diagram](images/stavovy_diagram.png)
 
 Dále můžeme nastavit "oversampling" naměřených ADC dat, a také jejich filtraci IIR filtrem.
 * Oversampling ADC dat slouží k redukci šumu, a k zpřesnění naměřených dat. Může nabývat hodnot `1×`, `2×`, `4×`, `8×` a `16×`. Jestliže je oversampling u některého z dat vypnutý, tak senzor tato data neměří.
@@ -184,13 +184,13 @@ Přepočet dat je uskutečněn pomocí kompenzačních dat stažených z registr
 Pro vypisování potřebných dat na LCD display bylo využito knihovny "lcd.h", která umožňuje snadné nastavení pinů pro správnou funkci displaye. Pro inicializaci a zapnutí displaye se využije funkce "lcd_init()". Knihovna dále obsahuje důležitou funkci "lcd_puts()", která jako svůj parametr přijme řetězec znaků ve formě string a vypíše je na display. Pro nastavení polohy okud se mají znaky začít vypisovat slouží funkce "lcd_gotoxy()", která jako své parametry požduje x a y souřadnice na displayi.
 Na následujícím obrázku lze vidět schéma připojení displaye na desku Arduino UNO.
 
-![LCD_SCHEME](images/LCD_SCHEME.PNG)
+![LCD_SCHEME](images/LCD_SCHEME.png)
 
 ### 4. Kostra aplikace
 Hlavní součástí kódu aplikace je stavový automat, který mění stavy po zmáčknutí tlačítka a podle toho zobrazuje data.
 Stavový automat s jednotlivými stavy vypadá následovně:
 
-![FSM](images/FSM.PNG)
+![FSM](images/FSM.png)
 
 Automat funguje uvnitř ISR (interrupt service routine), která je vyvolána periodicky pomocí časovače (TIMER2), a to každých 128 us. Uvnitř této funkce se pkaždé zkontroluje, jestli bylo zmáčknuto tlačítko (popřípadě puštěno), a podle toho se vyvolá odpovídající událost - stavový automat se přesune do nového stavu. V každém z těchto stavů požádá program o data ze senzoru, a ty následně vypíše na LCD display. K této funkci byla použita knihovna "timer.h", vytvořena v jednom z našich cvičení v předmětu DE2.
 
