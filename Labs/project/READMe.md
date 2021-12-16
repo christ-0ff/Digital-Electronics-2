@@ -56,6 +56,8 @@ Vytvoření meteostanice pro měření teploty a tlaku s natáčecím solárním
 
 ## Hlavní aplikace
 
+   ![main](images/main_scheme.png)
+
 ### 1. Ovládání servo motoru
 #### Ovládání servo motoru fotorezistorem
 
@@ -207,3 +209,4 @@ Write your text here
 
 * [BME 280 - Datasheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf) -- https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf
 * [Video k servomotoru](https://www.youtube.com/watch?v=9WeewNNGs5E) -- https://www.youtube.com/watch?v=9WeewNNGs5E
+* Veškerá cvičení z předmětu DE2
